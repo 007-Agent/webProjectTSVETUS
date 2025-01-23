@@ -10,7 +10,7 @@ import styles from './styles.js'
 class MetaData extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.data = props.data
+    this.data = props.data // info.inspection
     this.state = { data: clone(props.data), show: props.show }
     this.save = this.save.bind(this)
     this.cancel = this.cancel.bind(this)
@@ -88,15 +88,17 @@ class MetaData extends React.PureComponent {
   }
 
   handleChange(event) {
+    // метод изменяющий сосатояние элемента
     let index = event.index
     if (index >= 0) {
-      let data = clone(this.state.data)
-      data[index] = event.value
+      let data = clone(this.state.data) // копируем данные из цикла в массив данных
+      data[index] = event.value // меняем значение элемента
       this.setState({ data: data }, () => {
         if (this.props.nested) {
-          this.change(data)
+          // После обновления состояния метод проверяет, есть ли свойство nested в props компонента.
+          this.change(data) // если есть, то обновляем данные в компоненте
         } else {
-          this.notify(this.save, this.cancel)
+          this.notify(this.save, this.cancel) //
         }
       })
     }
