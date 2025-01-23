@@ -1,0 +1,121 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import {
+    TTop,
+    TIcon,
+    merge,
+    Sizer
+} from 'tinput';
+
+import styles from './styles.js';
+
+import icons from 'online/resources/icons.js';
+
+class Header extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {width: 0};
+        this.goHome = this.goHome.bind(this);
+        this.sizer = new Sizer(this);
+    }
+
+    componentWillUnmount() {
+        this.sizer.free();
+    }
+
+    goHome() {
+    }
+
+    render () {
+
+        let style = merge(styles, this.props.style);
+
+        let title = null;
+        if (this.state.width < 520) {
+            title = (
+                <div style={style.title.container}>
+                    <div style={style.title.content}>
+                        ФГБУ ДМЦ
+                    </div>
+                </div>
+            );
+        } else if (this.state.width < 720) {
+            title= (
+                <div style={style.title.container}>
+                    <div style={style.title.content}>
+                        ФГБУ ДМЦ УДП РФ
+                    </div>
+                </div>
+            );
+        } else {
+            title = (
+                <div style={style.title.container}>
+                    <div style={style.title.header}>
+                        ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ
+                    </div>
+                    <div style={style.title.content}>
+                        ДЕТСКИЙ МЕДИЦИНСКИЙ ЦЕНТР
+                    </div>
+                    <div style={style.title.footer}>
+                        УПРАВЛЕНИЯ ДЕЛАМИ ПРЕЗИДЕНТА РОССИЙСКОЙ ФЕДЕРАЦИИ
+                    </div>
+                </div>
+            );
+        }
+
+        let home = this.props.device === 'mobile' ?
+            <TIcon
+                key={'home'}
+                style={style.home.icon}
+                icon={icons.logo} /> :
+            <div key={'home'} style={style.home.container}>
+                <TIcon
+                    style={style.home.icon}
+                    name={'home'}
+                    icon={icons.logo}
+                    onClick={this.goHome} />
+                <div
+                    style={style.home.back}>
+                    {'На сайт'}
+                </div>
+            </div>;
+
+        let icon = null;
+        if (this.props.device === 'mobile') {
+            icon = 'menu';
+        } else if (this.props.user && this.props.user.id > 0) {
+            icon = 'menu';
+        } else {
+            if (this.props.page === 'schedule') {
+                icon = 'menu';
+            } else {
+                icon = icons.logo;
+            }
+        }
+
+        return (
+
+            <TTop
+                style={style.top}
+                caption={title}
+                tools={[{icon: home, onClick: this.goHome}]}
+                name={this.props.name}
+                icon={icon}
+                onClick={this.props.onClick} />
+
+        );
+
+    }
+
+}
+
+Header.propTypes = {
+    style: PropTypes.object,
+    name: PropTypes.string,
+    items: PropTypes.array,
+    onClick: PropTypes.func
+};
+
+export default Header;

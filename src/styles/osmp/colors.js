@@ -1,0 +1,21 @@
+export default {
+    border: "#6ca7b0",
+    frame: "rgba(108,167,176,0.50)",
+    window: "#ffffff",
+    panel: "#d1d6dc",
+    menu: "#c0c5cb",
+    text: "#000000",
+    error: "#ff3333",
+    message: "#33ff33",
+    control: "#555555",
+    current: "#bd7070",
+    sunday: "#fb6327",
+    saturday: "#fb9d78",
+    doctor: "#e6eafd",
+    assistant: "#f8fde6",
+    absent: "#ff9999",
+    shadow: "rgba(52,121,130,0.15)",
+    metaText: "#86280c",
+    metaCaption: "#327b5c",
+    invalid: "#c11716"
+}

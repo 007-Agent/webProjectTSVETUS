@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+          "type": "java",
+          "name": "DMC",
+          "request": "launch",
+          "cwd": "${workspaceFolder}",
+          "console": "internalConsole",
+          "mainClass": "ru.profi.dmc.DmcApplication",
+          "projectName": "dmc",
+          "args": "--spring.profiles.active=debug"
+        },
+        {
+          "type": "java",
+          "name": "ONLINE",
+          "request": "launch",
+          "cwd": "${workspaceFolder}",
+          "console": "internalConsole",
+          "mainClass": "ru.profi.online.OnlineApplication",
+          "projectName": "online",
+          "args": "--spring.profiles.active=debug"
+      }
+    ]
+}
