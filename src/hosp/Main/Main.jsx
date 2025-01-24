@@ -13,11 +13,11 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      menu: false,
-      page: 'hosp',
-      tools: [],
-      caption: '',
-      show: [],
+      menu: false, //
+      page: 'hosp', // текущая страница
+      tools: [], // инструменты
+      caption: '', // заголовок страницы
+      show: [], // показываемые инструменты
       number: null,
       car: null
     }
@@ -56,21 +56,23 @@ class Main extends React.Component {
     if (event.button === 'submit') {
       this.props.onLogin(event.value.username, event.value.password)
     }
-  }
+  } // передаём в redux логин и пароль
 
   handleTools(tools) {
     this.setState({ tools: tools })
   }
 
   handleCaption(caption) {
+    //
     this.setState({ caption: caption })
   }
 
   handleCheck() {
-    this.props.onCheck()
+    this.props.onCheck() // проверяем наличие пользователя_ в redux
   }
 
   handleRoute(car) {
+    // управляет состоянием изменения страницы
     this.setState({
       page: 'routes',
       car: car
@@ -85,7 +87,7 @@ class Main extends React.Component {
   }
 
   connected() {
-    return this.props.user && this.props.user.id > 0
+    return this.props.user && this.props.user.id > 0 // авторизован ли пользователь)
   }
 
   render() {
@@ -141,12 +143,13 @@ class Main extends React.Component {
     let name = this.connected() ? (
       <div style={style.caption.username}>{this.props.user.name}</div>
     ) : null
-    let caption = (
-      <div style={style.caption.container}>
-        {name}
-        <div style={style.caption.content}>{this.state.caption}</div>
-      </div>
-    )
+    let caption = // получаем заголовок страницы
+      (
+        <div style={style.caption.container}>
+          {name}
+          <div style={style.caption.content}>{this.state.caption}</div>
+        </div>
+      )
 
     return (
       <div>
@@ -162,14 +165,14 @@ class Main extends React.Component {
         <TTop
           style={style.top}
           name={'topMenu'}
-          caption={caption}
+          caption={caption} // заголовок страницы
           tools={this.state.tools}
           onClick={this.handleMenu}
         />
 
         {content}
 
-        <TLogin
+        <TLogin // вызывает форму для авторизации в интерфейс)
           name={'loginForm'}
           wait={this.props.wait}
           show={!this.connected()}

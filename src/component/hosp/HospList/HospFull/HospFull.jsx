@@ -55,10 +55,11 @@ const HospFull = props => {
   }
 
   const onChange = task => {
+    // task - переданное значение!
     const newTasks = clone(tasks) // создается копия массива tasks, в котором будут изменены значения
     const oldTask = tasks.find(v => {
       // цикл по массиву tasks, который содержит измененные значения
-      return v.name === task.name
+      return v.name === task.name // если значение равняется с переданным значением то цикл выполняется
     })
     if (task.save && task.cancel) {
       // если есть два кнопки сохранения и отмены то цикл выполняется
@@ -97,7 +98,7 @@ const HospFull = props => {
 
   const inspection =
     info.inspection && info.inspection.length ? (
-      <MetaData
+      <MetaData // полная форма осмотра пациента
         style={style.data}
         data={info.inspection} // передаём данные
         name={'inspection'}
@@ -112,7 +113,7 @@ const HospFull = props => {
 
   const records =
     info.records && info.records.length ? (
-      <MetaRecords
+      <MetaRecords //
         style={style.data}
         data={info.records}
         name={'records'}
@@ -155,11 +156,11 @@ const HospFull = props => {
   return (
     <div style={style.wrapper}>
       <div style={style.container}>
-        <Info style={style.info} info={info} />
+        <Info style={style.info} info={info} /> *// в info передаём информацию о
+        пациенте с которым работаем,из функции refresh *//
         {inspection}
         {records}
         {temperature}
-
         <Saver tasks={tasks} onClear={onClear} />
       </div>
     </div>

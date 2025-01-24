@@ -18,6 +18,7 @@ const META_CHK = 8
 const META_MTX = 9
 
 class Meta extends React.Component {
+  // Компонент для заполнения и редактирования полей, точнее данных осмотра пациента!
   constructor(props) {
     super(props)
     this.change = this.change.bind(this)
@@ -36,6 +37,7 @@ class Meta extends React.Component {
   }
 
   change(value) {
+    // Сохранение значений в поле, + изменение данных в поле!
     if (this.props.onChange) {
       this.props.onChange({
         name: this.props.name,
@@ -46,6 +48,7 @@ class Meta extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // Обновление компонента!, если данные изменились! + проверка на изменение данных в поле!
     return !compare(this.props.value, nextProps.value)
   }
 
@@ -69,6 +72,7 @@ class Meta extends React.Component {
   }
 
   handleTextChange(event) {
+    // + изменение данных в поле! Обновляет список значений
     if (this.props.onChange) {
       let value = clone(this.props.value)
       value.data.list = []
@@ -106,8 +110,8 @@ class Meta extends React.Component {
         content = (
           <Ref
             style={style.component}
-            id={data.id}
-            label={label}
+            id={data.id} //
+            label={label} //
             value={value}
             placeholder={'-'}
             onChange={this.handleRefChange}

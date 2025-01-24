@@ -13,20 +13,21 @@ import HospFull from './HospFull'
 const TIMEOUT = 30 * 1000 // Время ожидания перед новым запросом!
 
 const HospList = props => {
+  // Список пациентов для опр больницы, так же оформление самого пользователя! Выбор самого отделения
   const mounted = useRef(false)
   const timer = useRef(0)
   const userId = props.user && props.user.id ? props.user.id : 0
 
   const [list, setList] = useState([]) // список пациентов из выбранной больницы!
   const [index, setIndex] = useState(-1) // индекс выбранного пациента
-  const [type, setType] = useState(1) // event,value
+  const [type, setType] = useState(1) // event,value. Выранный пункт из списка отделений!
 
   const refresh = useRef() // Эта функция выполняет запрос на сервер для получения списка больниц в зависимости от типа и идентификатора пользователя.
   refresh.current = event => {
     clearTimeout(timer.current)
     if (index < 0 && event.userId > 0) {
       // Если индекс выбранной больницы меньше 0 и userId больше 0, формируется запрос с типом больницы.
-      const query = { type: event.type } //query, который будет передан на сервер в запросе для получения списка больниц, type - тип больницы.
+      const query = { type: event.type } //query, который будет передан на сервер в запросе для получения списка пациентов, type - тип больницы.
 
       // const query = {type}
       post({
@@ -71,9 +72,9 @@ const HospList = props => {
     if (index === event.index) {
       return (
         <HospFull
-          key={event.item.id}
-          index={event.index}
-          info={event.item}
+          key={event.item.id} // передаём id пациента
+          index={event.index} // передаём индекс пациента
+          info={event.item} // вся инфорация пациент, объект с данными по которому кликнули! на нужную карту точнее
           user={props.user}
           onClose={onClose}
           onTools={onTools}
@@ -84,7 +85,7 @@ const HospList = props => {
         <HospShort
           key={event.item.id}
           index={event.index}
-          info={event.item}
+          info={event.item} // вся инфорация пациент, объект с данными по которому кликнули! на нужную карту точнее
           onClick={onClick}
         />
       )
@@ -112,17 +113,19 @@ const HospList = props => {
   return (
     <div style={style.container}>
       <TPanel style={style.panel}>
+        {' '}
+        // Контент по центру
         <div style={style.params.container}>
-          <Ref
+          <Ref // форма для клика по нужному отделу))
             style={style.params.type}
             name={'type'}
             label={'Тип:'}
             value={type}
-            table={'ref_hosp_type'}
-            onChange={onTypeChange}
+            table={'ref_hosp_type'} //
+            onChange={onTypeChange} // выбранный пункт отделения
           />
         </div>
-        <TPager
+        <TPager //
           style={style.pager}
           size={50}
           items={list}
@@ -133,7 +136,9 @@ const HospList = props => {
       </TPanel>
 
       <TScroll style={style.scroll}>
-        <TRibbon
+        {' '}
+        // форма для пролистования инфы
+        <TRibbon // список пациентов к определенной таблицы!
           style={style.ribbon}
           name={'myRibbon'}
           items={list}
