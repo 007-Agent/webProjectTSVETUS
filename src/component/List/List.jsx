@@ -9,7 +9,7 @@ import styles from './styles.js'
 
 class List extends React.Component {
   constructor(props) {
-    super(props)
+    super(props) // ещё передаем пустой массив list в props.value
     this.state = {
       value: null
     }
@@ -73,9 +73,11 @@ class List extends React.Component {
           ) : (
             <div style={style.text}>{v.name}</div>
           )
+
           return (
             <div key={i} style={style.item}>
               {item}
+              {/* // список выбранных пунктов, рядом кнопкаудаления выбранного пунка  */}
               <TIcon
                 style={style.iconDelete}
                 name={'delete'}
@@ -89,14 +91,15 @@ class List extends React.Component {
 
     return (
       <TGroup style={style.group} label={this.props.label}>
+        {/* группируем список диагнозов а сверху выбранные диагнозы с кнопкой удаления */}
         {list}
 
         <div style={style.bottom}>
           <Ref
             style={style.ref}
-            id={this.props.id}
+            id={this.props.id} // передаем id не пациента, а data.id!
             table={this.props.table}
-            value={this.state.value}
+            value={this.state.value} // обычно пустой массив, в который будем заносить данные)
             icon={this.props.showIcon ? 'add' : undefined}
             showEdit={true}
             readOnly={true}

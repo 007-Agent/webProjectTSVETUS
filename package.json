@@ -9,24 +9,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "webpack --display-error-details --config webpack.config.prod.js",
-    "dev": "webpack-dev-server  --config webpack.config.dev.js --color --hot --inline --watch",
-    "start": "react-scripts start"
+    "dev": "webpack-dev-server  --config webpack.config.dev.js --color --hot --inline --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "docgen": "^0.0.1",
     "math": "0.0.3",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
-    "react": "^16.14.0",
+    "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^6.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "tinput": "^2.3.52"
+    "tinput": "^2.1.19"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

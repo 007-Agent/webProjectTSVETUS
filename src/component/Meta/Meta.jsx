@@ -18,9 +18,8 @@ const META_CHK = 8
 const META_MTX = 9
 
 class Meta extends React.Component {
-  // Компонент для заполнения и редактирования полей, точнее данных осмотра пациента!
   constructor(props) {
-    super(props)
+    super(props) // в пропсы передали value={v}(this.props.value)
     this.change = this.change.bind(this)
     this.handleRefChange = this.handleRefChange.bind(this)
     this.handleListChange = this.handleListChange.bind(this)
@@ -37,7 +36,6 @@ class Meta extends React.Component {
   }
 
   change(value) {
-    // Сохранение значений в поле, + изменение данных в поле!
     if (this.props.onChange) {
       this.props.onChange({
         name: this.props.name,
@@ -48,7 +46,6 @@ class Meta extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    // Обновление компонента!, если данные изменились! + проверка на изменение данных в поле!
     return !compare(this.props.value, nextProps.value)
   }
 
@@ -60,6 +57,7 @@ class Meta extends React.Component {
         value.data.list.push(event.item)
       }
       this.change(value)
+      // console.log(value.data.list, 'hLIIIST')
     }
   }
 
@@ -72,13 +70,14 @@ class Meta extends React.Component {
   }
 
   handleTextChange(event) {
-    // + изменение данных в поле! Обновляет список значений
     if (this.props.onChange) {
       let value = clone(this.props.value)
+      console.log(value.data.list, 'hLIIIST')
       value.data.list = []
       if (event.value && event.value.trim() !== '') {
         value.data.list.push({ id: null, order: 0, name: event.value })
       }
+      // console.log(data.type, 'data-type')
       this.change(value)
     }
   }
@@ -101,6 +100,7 @@ class Meta extends React.Component {
 
     if (this.props.value && this.props.value.data) {
       let data = this.props.value.data
+      console.log(data, 'DATA-2')
       let label = data.name
       if (data.type === META_REF) {
         let value = null
@@ -110,8 +110,8 @@ class Meta extends React.Component {
         content = (
           <Ref
             style={style.component}
-            id={data.id} //
-            label={label} //
+            id={data.id}
+            label={label}
             value={value}
             placeholder={'-'}
             onChange={this.handleRefChange}

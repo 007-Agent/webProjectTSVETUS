@@ -5,29 +5,28 @@ import { TListBox, merge, post } from 'tinput'
 
 import styles from './styles.js'
 
-const REF_URL_META = '/rest/meta/results' // URL-адреса для получения данных о метаданных и таблицах соответственно.
-const REF_URL_TABLE = '/rest/pol/ref'
-const EMPTY = { id: -1, order: -1, code: -1, name: '-' }
+const REF_URL_META = '/rest/meta/results' //это URL-адреса для получения данных о справочниках.
+const REF_URL_TABLE = '/rest/pol/ref' // это URL-адреса для получения данных о справочниках.
+const EMPTY = { id: -1, order: -1, code: -1, name: '-' } // это объект, представляющий пустое значение для списка.
 
-const REFS = {}
+const REFS = {} // объект для хранения данных о справочниках и их коллбеках.
 
 const getRef = props => {
-  //Возвращает объект с кэшированными данными для заданного ключа (идентификатор или название таблицы).
+  // получает или создает объект для хранения данных о справочниках и коллбеках для конкретного ключа.
   const key = props.id || props.table || 'def'
   if (!(key in REFS)) REFS[key] = { callbacks: new Set() }
   return REFS[key]
 }
 
 const updateList = component => {
-  // Загружает данные для списка, если они еще не были загружены. Выполняет HTTP-запрос, если данные отсутствуют, и обновляет состояние компонента.
+  // обновляет список элементов. Если элементы уже загружены, они устанавливаются в состояние компонента. Если нет, отправляется HTTP-запрос для получения данных.
   const ref = getRef(component.props)
-  if (ref.items)
-    component.setState({ items: ref.items }) // Если данные загружены
+  if (ref.items) component.setState({ items: ref.items })
   else {
-    // Формирует параметры для запроса и отправляет запрос
     if (ref.callbacks.size === 0) {
       let params = {}
       if (component.props.id) {
+        // пустые данные, то выполняем запрос для получения списка пунктов!
         params = {
           url: REF_URL_META,
           data: { id: component.props.id }
@@ -38,11 +37,11 @@ const updateList = component => {
           data: { table: component.props.table }
         }
       }
+      console.log(component.props.id, 'PROPS>IDDDDD')
       post({
-        // вызывавет функцию, которая отправляет запрос на сервер
         ...params,
         success: response => {
-          ref.items = response //
+          ref.items = response
           ref.callbacks.forEach(v => v(response))
         }
       })
@@ -52,7 +51,6 @@ const updateList = component => {
 }
 
 const unlink = component => {
-  //
   const ref = getRef(component.props)
   ref.callbacks.delete(component.updateRef)
 }
@@ -77,7 +75,7 @@ class Ref extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //  Определяет, нужно ли обновлять компонент при изменении пропсов или состояния.
+    // определяет, нужно ли обновлять компонент, основываясь на изменениях в props и state
     return (
       this.props.value !== nextProps.value ||
       this.state.items !== nextState.items
@@ -85,15 +83,16 @@ class Ref extends React.Component {
   }
 
   handleChange(event) {
-    // Выбираем нужный пунки из списка отделений
+    // обрабатывает изменения в списке и вызывает переданный коллбек onChange, если он есть.
     if (this.props.onChange) {
       this.props.onChange(event)
     }
   }
 
   updateRef(items) {
-    //Обновляет состояние компонента новыми значениями элементов.
+    // обновляет состояние items, если компонент все еще смонтирован.
     if (this.mounted) this.setState({ items })
+    // console.log(items, 'ITEEEMS') // рендерим пункты для клика, точнее список вариантов. Массив в котром лежат все списки для вопросников!
   }
 
   render() {
@@ -106,14 +105,14 @@ class Ref extends React.Component {
         style={style}
         name={this.props.name}
         empty={EMPTY}
-        items={this.state.items} //
-        value={this.props.value} // текущий выбранный пункт спискаБ при клике на другой пункт, type меняется(<HospList />). Зачем снова передаётся в value
+        items={this.state.items}
+        value={this.props.value}
         placeholder={this.props.placeholder}
         showIcon={showIcon}
         showEdit={this.props.showEdit}
-        icon={this.props.icon} //
-        label={this.props.label} // Тип:
-        caption={this.props.label || this.props.caption} //
+        icon={this.props.icon}
+        label={this.props.label}
+        caption={this.props.label || this.props.caption}
         modal={this.props.modal}
         chars={this.props.chars}
         keyField={['id', 'key']}

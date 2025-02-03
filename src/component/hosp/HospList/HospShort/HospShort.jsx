@@ -6,12 +6,11 @@ import styles from './styles.js'
 import { merge, strDate, cutDate } from 'tinput'
 
 const HospShort = props => {
-  // Информация о карточки клиента! Точнее карточки всех пациентов!
   const info = props.info || {}
   const state = info.state
 
   const onClick = () => {
-    props.onClick({ index: props.index }) // Передать индекс клиента в функцию клиента. на какой индекс в общем нажали
+    props.onClick({ index: props.index })
   }
 
   const style = merge(styles, props.style)
@@ -38,7 +37,7 @@ const HospShort = props => {
         <div style={style.stay}>
           Пребывание с {cutDate(dateIn)} по {strDate(dateOut)}
         </div>
-      </div> // Заполнили инфумини каррты одного пациента
+      </div>
     )
   } else {
     return <div></div>

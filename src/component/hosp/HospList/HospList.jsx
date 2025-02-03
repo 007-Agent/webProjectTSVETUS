@@ -10,32 +10,29 @@ import Ref from 'component/Ref'
 import HospShort from './HospShort'
 import HospFull from './HospFull'
 
-const TIMEOUT = 30 * 1000 // Время ожидания перед новым запросом!
+const TIMEOUT = 30 * 1000
 
 const HospList = props => {
-  // Список пациентов для опр больницы, так же оформление самого пользователя! Выбор самого отделения
   const mounted = useRef(false)
   const timer = useRef(0)
   const userId = props.user && props.user.id ? props.user.id : 0
 
-  const [list, setList] = useState([]) // список пациентов из выбранной больницы!
-  const [index, setIndex] = useState(-1) // индекс выбранного пациента
-  const [type, setType] = useState(1) // event,value. Выранный пункт из списка отделений!
+  const [list, setList] = useState([])
+  const [index, setIndex] = useState(-1)
+  const [type, setType] = useState(1)
 
-  const refresh = useRef() // Эта функция выполняет запрос на сервер для получения списка больниц в зависимости от типа и идентификатора пользователя.
+  const refresh = useRef()
   refresh.current = event => {
     clearTimeout(timer.current)
     if (index < 0 && event.userId > 0) {
-      // Если индекс выбранной больницы меньше 0 и userId больше 0, формируется запрос с типом больницы.
-      const query = { type: event.type } //query, который будет передан на сервер в запросе для получения списка пациентов, type - тип больницы.
-
+      const query = { type: event.type }
+      console.log(query)
       // const query = {type}
       post({
-        // Делаем запрос на сервер1 для получения списка больниц определенного типа. и идентификатора пользователя.
         url: '/rest/hosp/list',
-        data: query, // Этот объект query будет содержать данные, необходимые для получения списка больниц(Стационарных посетителей!) определенного типа.
+        data: query,
         success: response => {
-          setList(response) // получаем список пациентов и записываем в state
+          setList(response)
         },
         default: () => {
           timer.current = setTimeout(() => {
@@ -49,6 +46,7 @@ const HospList = props => {
       }, TIMEOUT)
     }
   }
+  console.log(list)
 
   const onTypeChange = event => {
     if (event.value !== type) setType(event.value)
@@ -59,7 +57,6 @@ const HospList = props => {
   }
 
   const onClose = () => {
-    // закрываем список больниц
     setIndex(-1)
   }
 
@@ -68,13 +65,12 @@ const HospList = props => {
   }
 
   const onFrame = event => {
-    // Показывает список пациентов, если я нажал на нужную карту, то return <HospFull />, если нет, то return <HospShort />. Точнее нажал на index)
     if (index === event.index) {
       return (
         <HospFull
-          key={event.item.id} // передаём id пациента
-          index={event.index} // передаём индекс пациента
-          info={event.item} // вся инфорация пациент, объект с данными по которому кликнули! на нужную карту точнее
+          key={event.item.id}
+          index={event.index}
+          info={event.item}
           user={props.user}
           onClose={onClose}
           onTools={onTools}
@@ -85,7 +81,7 @@ const HospList = props => {
         <HospShort
           key={event.item.id}
           index={event.index}
-          info={event.item} // вся инфорация пациент, объект с данными по которому кликнули! на нужную карту точнее
+          info={event.item}
           onClick={onClick}
         />
       )
@@ -99,8 +95,8 @@ const HospList = props => {
   useEffect(() => {
     mounted.current = true
     return () => {
-      mounted.current = false //компонент был размонтирован. Это значение может быть использовано для предотвращения обновления состояния, если компонент больше не смонтирован.
-      clearTimeout(timer.current) // предотвращает выполнение кода в таймере
+      mounted.current = false
+      clearTimeout(timer.current)
     }
   }, [])
 
@@ -113,19 +109,17 @@ const HospList = props => {
   return (
     <div style={style.container}>
       <TPanel style={style.panel}>
-        {' '}
-        // Контент по центру
         <div style={style.params.container}>
-          <Ref // форма для клика по нужному отделу))
+          <Ref
             style={style.params.type}
             name={'type'}
             label={'Тип:'}
             value={type}
-            table={'ref_hosp_type'} //
-            onChange={onTypeChange} // выбранный пункт отделения
+            table={'ref_hosp_type'}
+            onChange={onTypeChange}
           />
         </div>
-        <TPager //
+        <TPager
           style={style.pager}
           size={50}
           items={list}
@@ -136,9 +130,7 @@ const HospList = props => {
       </TPanel>
 
       <TScroll style={style.scroll}>
-        {' '}
-        // форма для пролистования инфы
-        <TRibbon // список пациентов к определенной таблицы!
+        <TRibbon
           style={style.ribbon}
           name={'myRibbon'}
           items={list}
