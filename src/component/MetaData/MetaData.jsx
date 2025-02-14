@@ -128,13 +128,13 @@ class MetaData extends React.PureComponent {
     const content = this.state.data ? (
       this.state.show ? (
         this.state.data.map((v, i) => {
-          console.log(v, 'v')
+          // console.log(v, 'v') // передаём каждый элемент в массиве
           return this.check(v) ? (
             <Meta
               key={i}
               index={i}
               style={ms}
-              value={v}
+              value={v} // передаём один объект с данными со многими данными.
               onChange={this.handleChange}
             />
           ) : null

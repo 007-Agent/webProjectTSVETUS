@@ -29,7 +29,7 @@ const updateList = component => {
         // пустые данные, то выполняем запрос для получения списка пунктов!
         params = {
           url: REF_URL_META,
-          data: { id: component.props.id }
+          data: { id: component.props.id } // у кажого пациента(id) есть внутри data.id = ..., по которому мы получаем список пунктов для клика на вопрос.
         }
       } else if (component.props.table) {
         params = {

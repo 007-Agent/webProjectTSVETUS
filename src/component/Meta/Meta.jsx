@@ -99,10 +99,12 @@ class Meta extends React.Component {
     let content = null
 
     if (this.props.value && this.props.value.data) {
-      let data = this.props.value.data
+      // есть да)
+      let data = this.props.value.data // передаём свойство data в массиве value)
       console.log(data, 'DATA-2')
-      let label = data.name
+      let label = data.name // цикл идёт map.value...
       if (data.type === META_REF) {
+        // проходимся по кажому объекут и прояверяем чеау равно data.type....
         let value = null
         if (data.list.length > 0 && data.list[0]) {
           value = data.list[0].id
@@ -111,8 +113,8 @@ class Meta extends React.Component {
           <Ref
             style={style.component}
             id={data.id}
-            label={label}
-            value={value}
+            label={label} // например стул)
+            value={value} // пустое свойство
             placeholder={'-'}
             onChange={this.handleRefChange}
           />
@@ -122,9 +124,9 @@ class Meta extends React.Component {
         content = (
           <List
             style={style.list}
-            id={data.id}
-            label={label}
-            value={value}
+            id={data.id} // id=8352
+            label={label} // по порядку идут данные this.props.value
+            value={value} //пустой массив
             onChange={this.handleListChange}
           />
         )

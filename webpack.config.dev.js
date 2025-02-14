@@ -69,7 +69,7 @@ module.exports = [
       proxy: [
         {
           context: ['/api', '/rest', '/policy'],
-          target: 'http://localhost:8080',
+          target: 'https://profiweb2.kdpmc.ru:8443',
           changeOrigin: true,
           secure: false,
           bypass: function (req, res, proxyOptions) {
@@ -146,7 +146,7 @@ module.exports = [
       proxy: [
         {
           context: ['/api', '/rest', '/policy'],
-          target: 'http://localhost:8080',
+          target: 'https://profiweb2.kdpmc.ru:8443',
           changeOrigin: true,
           secure: false,
           bypass: function (req, res, proxyOptions) {
