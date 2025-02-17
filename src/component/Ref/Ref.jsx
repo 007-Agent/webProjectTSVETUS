@@ -19,6 +19,7 @@ const getRef = props => {
 }
 
 const updateList = component => {
+  // console.log(component, 'COMPONENTTTTT')
   // обновляет список элементов. Если элементы уже загружены, они устанавливаются в состояние компонента. Если нет, отправляется HTTP-запрос для получения данных.
   const ref = getRef(component.props)
   if (ref.items) component.setState({ items: ref.items })
@@ -37,7 +38,7 @@ const updateList = component => {
           data: { table: component.props.table }
         }
       }
-      console.log(component.props.id, 'PROPS>IDDDDD')
+      // console.log(component.props.id, 'id')
       post({
         ...params,
         success: response => {
@@ -83,6 +84,7 @@ class Ref extends React.Component {
   }
 
   handleChange(event) {
+    console.log(event, 'EVENT')
     // обрабатывает изменения в списке и вызывает переданный коллбек onChange, если он есть.
     if (this.props.onChange) {
       this.props.onChange(event)

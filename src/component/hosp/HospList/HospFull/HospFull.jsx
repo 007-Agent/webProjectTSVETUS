@@ -11,13 +11,14 @@ import Info from './Info'
 
 import Saver from '../../../Saver'
 
-const PROJECT = 'hosp'
+const PROJECT = 'hosp' // пределяется константа PROJECT, которая используется для обозначения текущего проекта (в данном случае, это 'hosp').
 
 const HospFull = props => {
+  //  предназначен для отображения полной информации о пациенте в контексте медицинского приложения. первичный осмотр, Дневниковые хаписи, Темп.лист
   const mounted = useRef(false)
 
-  const [info, setInfo] = useState(props.info || {})
-  const [tasks, setTasks] = useState([])
+  const [info, setInfo] = useState(props.info || {}) // хранит инфу о пациенте
+  const [tasks, setTasks] = useState([]) // массив задач, которые могут быть связаны с сохранением данных.
 
   const id = props.info.id
 
@@ -33,7 +34,7 @@ const HospFull = props => {
       }
     })
   }
-  console.log(info, 'info')
+  console.log(info, 'info-onePacient') // данные об однои пациенте, кликая на его карточку
   const onTools = useRef()
   onTools.current = event => {
     if (props.onTools) {
@@ -73,9 +74,10 @@ const HospFull = props => {
 
   useEffect(() => {
     refresh.current({ id })
-  }, [id])
+  }, [id]) // Первый useEffect вызывает refresh для получения данных при первом рендере компонента и при изменении id.
 
   useEffect(() => {
+    // Второй useEffect устанавливает состояние монтирования и настраивает инструменты (например, кнопку закрытия) при монтировании компонента.
     mounted.current = true
     onTools.current({ tools: [{ icon: 'close', onClick: onClose }] })
     return () => {
@@ -90,7 +92,7 @@ const HospFull = props => {
     info.inspection && info.inspection.length ? (
       <MetaData
         style={style.data}
-        data={info.inspection}
+        data={info.inspection} // info.insection - все вопросы из первичного осмотра!
         name={'inspection'}
         project={PROJECT}
         type={PROJECT}
@@ -147,11 +149,13 @@ const HospFull = props => {
     <div style={style.wrapper}>
       <div style={style.container}>
         <Info style={style.info} info={info} />
+        {/* // отображает элементы для осмотра пациента */}
         {inspection}
         {records}
         {temperature}
         {summary}
         <Saver tasks={tasks} onClear={onClear} />
+        {/* Компонент Saver отвечает за сохранение компонетов */}
       </div>
     </div>
   )

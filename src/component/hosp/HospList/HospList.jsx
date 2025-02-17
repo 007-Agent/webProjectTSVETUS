@@ -46,7 +46,7 @@ const HospList = props => {
       }, TIMEOUT)
     }
   }
-  console.log(list)
+  console.log(list, 'LIST-ID') // показывает спсиок всех пациентов по сан куру
 
   const onTypeChange = event => {
     if (event.value !== type) setType(event.value)

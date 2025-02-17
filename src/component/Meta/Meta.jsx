@@ -18,6 +18,7 @@ const META_CHK = 8
 const META_MTX = 9
 
 class Meta extends React.Component {
+  //  Показывает карточку пациента первичный осмотр! по порядку проходимся по объектам v = props.value. И для каждого объекта свой тип вопроса) Простыми словами показывает вопрос нужный по порядку
   constructor(props) {
     super(props) // в пропсы передали value={v}(this.props.value)
     this.change = this.change.bind(this)
@@ -36,6 +37,7 @@ class Meta extends React.Component {
   }
 
   change(value) {
+    // Обновляет родительский компонент с новыми данными.
     if (this.props.onChange) {
       this.props.onChange({
         name: this.props.name,
@@ -50,7 +52,9 @@ class Meta extends React.Component {
   }
 
   handleRefChange(event) {
+    // передаёт выбранный элемент, то есть по которому кликнули!
     if (this.props.onChange) {
+      // если функция передана через пропсы то...
       let value = clone(this.props.value)
       value.data.list = []
       if (event.item) {
@@ -63,6 +67,7 @@ class Meta extends React.Component {
 
   handleListChange(event) {
     if (this.props.onChange) {
+      // если функция передана через пропсы то...
       let value = clone(this.props.value)
       value.data.list = event.value.slice()
       this.change(value)
@@ -70,7 +75,9 @@ class Meta extends React.Component {
   }
 
   handleTextChange(event) {
+    // Метод handleTextChange в коде компонента Meta отвечает за обработку изменений, происходящих в текстовом поле
     if (this.props.onChange) {
+      // если функция передана через пропсы то...
       let value = clone(this.props.value)
       console.log(value.data.list, 'hLIIIST')
       value.data.list = []
@@ -83,43 +90,47 @@ class Meta extends React.Component {
   }
 
   handleChkChange(event) {
+    // если функция передана через пропсы то...
     if (this.props.onChange) {
       let value = clone(this.props.value)
       value.data.list = []
       if (event.value && event.value == 1) {
+        // если не пустое...
         value.data.list.push({ id: null, order: 0, name: event.value })
       }
-      this.change(value)
+      this.change(value) // передаём в функцию введённые данные
     }
   }
 
   render() {
     let style = merge(styles, this.props.style)
-
+    // console.log(this.props.value, 'vvvvvvvvvv') // список всех вопросов для пациента
     let content = null
 
     if (this.props.value && this.props.value.data) {
       // есть да)
       let data = this.props.value.data // передаём свойство data в массиве value)
-      console.log(data, 'DATA-2')
+      console.log(data, 'DATA-2') // data - объект, в котором пристутсвует вопрос, id вопроса и тд
       let label = data.name // цикл идёт map.value...
       if (data.type === META_REF) {
+        // Если тип данных META_REF, отображается компонент Ref.
         // проходимся по кажому объекут и прояверяем чеау равно data.type....
-        let value = null
+        let value = null // Идёт цикл простыми словами, проходимся по кажому объекту с вопросами
         if (data.list.length > 0 && data.list[0]) {
           value = data.list[0].id
         }
         content = (
           <Ref
             style={style.component}
-            id={data.id}
-            label={label} // например стул)
-            value={value} // пустое свойство
+            id={data.id} // код вопроса
+            label={label} // например Анамнез заболевания)
+            value={value} // пустое свойство, либо не пустое, если уже ответ дали
             placeholder={'-'}
             onChange={this.handleRefChange}
           />
         )
       } else if (data.type === META_MLT) {
+        // Если тип данных META_MLT, отображается компонент List.
         let value = data.list
         content = (
           <List
@@ -131,6 +142,7 @@ class Meta extends React.Component {
           />
         )
       } else if (data.type === META_STR) {
+        // Если тип данных META_STR, отображается текстовое поле TText.
         let value = null
         if (data.list.length > 0 && data.list[0]) {
           value = data.list[0].name

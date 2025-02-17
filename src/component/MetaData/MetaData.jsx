@@ -8,9 +8,10 @@ import Meta from 'component/Meta'
 import styles from './styles.js'
 
 class MetaData extends React.PureComponent {
+  //  Первчиный осмотр))
   constructor(props) {
-    super(props)
-    this.data = props.data
+    super(props) // передали data={info.inspection}
+    this.data = props.data // передали в data = info.inspection
     this.state = { data: clone(props.data), show: props.show }
     this.save = this.save.bind(this)
     this.cancel = this.cancel.bind(this)
@@ -47,6 +48,7 @@ class MetaData extends React.PureComponent {
   }
 
   change(data) {
+    // Обновляет родительский компонент с новыми данными.
     if (this.props.onChange) {
       this.props.onChange({
         name: this.props.name,
@@ -56,6 +58,7 @@ class MetaData extends React.PureComponent {
   }
 
   cancel() {
+    // Возвращает состояние данных к исходным значениям и уведомляет об этом
     this.setState({ data: clone(this.data) }, () => {
       this.notify()
     })
@@ -63,7 +66,7 @@ class MetaData extends React.PureComponent {
 
   save() {
     post({
-      url: `/rest/${this.props.project}/${this.props.name}/update`,
+      url: `/rest/${this.props.project}/${this.props.name}/update`, // сохраняет внесённые данные о осмотре пациента
       data: { data: this.state.data },
       sender: this,
       success: data => {
@@ -77,9 +80,9 @@ class MetaData extends React.PureComponent {
 
   check(event) {
     if (event.data && event.data.code && this.props.type) {
-      console.log(this.props.type, event.data.code)
+      // console.log(this.props.type, event.data.code)
       let arr = event.data.code.toLowerCase().split('.')
-      console.log(arr) // массив данных
+      // console.log(arr) // массив данных
       if (arr.indexOf('pnd') >= 0) {
         if (['pnd', 'pndmob'].indexOf(this.props.type) < 0) {
           return false
@@ -91,7 +94,9 @@ class MetaData extends React.PureComponent {
   }
 
   handleChange(event) {
-    let index = event.index
+    console.log(event.index, 'INDEX')
+    // передаём объект, внутри которого лежит name - выбранный пункт
+    let index = event.index // у выбранного пунка есть свой индекс
     if (index >= 0) {
       let data = clone(this.state.data)
       data[index] = event.value
@@ -107,8 +112,8 @@ class MetaData extends React.PureComponent {
 
   handleShow() {
     this.setState({ show: true })
-    console.log(this.data) // массив данных
-    console.log(this.state.data)
+    // console.log(this.data) // массив данных
+    // console.log(this.state.data)
   }
 
   handleHide() {
@@ -124,9 +129,9 @@ class MetaData extends React.PureComponent {
       list: style.list,
       text: style.text
     }
-
-    const content = this.state.data ? (
-      this.state.show ? (
+    console.log(this.data, 'DATAAAAAA INTERSNO') // у каждого пациента, есть свой ID вопросов
+    const content = this.state.data ? ( // если есть data то .....
+      this.state.show ? ( // если state.show === true то.....
         this.state.data.map((v, i) => {
           // console.log(v, 'v') // передаём каждый элемент в массиве
           return this.check(v) ? (
@@ -134,7 +139,7 @@ class MetaData extends React.PureComponent {
               key={i}
               index={i}
               style={ms}
-              value={v} // передаём один объект с данными со многими данными.
+              value={v} // передаём объект с данными и проходимя по ним по порядку)
               onChange={this.handleChange}
             />
           ) : null
@@ -149,7 +154,7 @@ class MetaData extends React.PureComponent {
       : style.group
 
     return (
-      <TGroup
+      <TGroup // отображает весь контент на карте пациента
         style={gs}
         label={this.props.caption}
         onClick={this.handleShow}

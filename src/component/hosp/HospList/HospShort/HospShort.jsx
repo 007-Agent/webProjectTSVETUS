@@ -6,6 +6,7 @@ import styles from './styles.js'
 import { merge, strDate, cutDate } from 'tinput'
 
 const HospShort = props => {
+  // простая наычальная карта с главными данными о пациенте!
   const info = props.info || {}
   const state = info.state
 

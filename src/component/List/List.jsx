@@ -8,6 +8,7 @@ import Ref from 'component/Ref'
 import styles from './styles.js'
 
 class List extends React.Component {
+  // всплывает иконка с выбором пунктов на вопрос!
   constructor(props) {
     super(props) // ещё передаем пустой массив list в props.value
     this.state = {
@@ -31,9 +32,12 @@ class List extends React.Component {
   }
 
   handleAdd(event) {
+    console.log(event.index, 'EVENTTT')
     this.setState({ value: event.value }, () => {
+      // число назначаем)
       if (event.item && event.index >= 0) {
-        let value = this.props.value ? clone(this.props.value) : []
+        let value = this.props.value ? clone(this.props.value) : [] // если уже ранее добовлял пункты то клонируем их,  если нет то пустой массив
+        console.log(event.item, 'ITEMRESULT') // показываем выбранный пункт с объектом
         value.push(event.item)
         if (this.props.onChange) {
           this.props.onChange({
@@ -41,6 +45,7 @@ class List extends React.Component {
             data: this.props.data,
             value: value
           })
+          console.log(value, 'value') // в value массив с данными(объектами) - выбранные пункты!
         }
       }
       this.clearValue()
@@ -66,7 +71,7 @@ class List extends React.Component {
   render() {
     let style = merge(styles, this.props.style)
 
-    let list = this.props.value
+    let list = this.props.value // передаём обьект одного вопроса id 8471
       ? this.props.value.map((v, i) => {
           let item = this.props.onItem ? (
             this.props.onItem({ item: v, style: style, index: i })
