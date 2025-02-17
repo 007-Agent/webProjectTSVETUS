@@ -43,7 +43,7 @@ class List extends React.Component {
           this.props.onChange({
             name: this.props.name,
             data: this.props.data,
-            value: value
+            value: value // массив с выбранными пунктами
           })
           console.log(value, 'value') // в value массив с данными(объектами) - выбранные пункты!
         }

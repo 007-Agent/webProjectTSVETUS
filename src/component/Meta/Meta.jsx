@@ -37,7 +37,9 @@ class Meta extends React.Component {
   }
 
   change(value) {
+    // передаём массив с выбранными пунктами(объекты внутри)
     // Обновляет родительский компонент с новыми данными.
+    console.log(value, 'VALUEMETA')
     if (this.props.onChange) {
       this.props.onChange({
         name: this.props.name,
@@ -66,10 +68,14 @@ class Meta extends React.Component {
   }
 
   handleListChange(event) {
+    // массив с выбранными пунктами передаем, value содержит объекты с выбранными пунктами
+
     if (this.props.onChange) {
       // если функция передана через пропсы то...
-      let value = clone(this.props.value)
+
+      let value = clone(this.props.value) // клонируем один вопрос нужный с данными если они там есть уже
       value.data.list = event.value.slice()
+      console.log(value, 'VALUEFIRSTMETA')
       this.change(value)
     }
   }
@@ -104,7 +110,7 @@ class Meta extends React.Component {
 
   render() {
     let style = merge(styles, this.props.style)
-    // console.log(this.props.value, 'vvvvvvvvvv') // список всех вопросов для пациента
+    console.log(this.props.value, 'vvvvvvvvvv') // список всех вопросов для пациента
     let content = null
 
     if (this.props.value && this.props.value.data) {

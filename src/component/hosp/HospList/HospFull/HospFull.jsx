@@ -25,7 +25,7 @@ const HospFull = props => {
   const refresh = useRef()
   refresh.current = event => {
     const query = { hospId: event.id }
-    console.log(query)
+    console.log(query, 'QUERYYYYY')
     post({
       url: '/rest/hosp/full',
       data: query,
@@ -53,6 +53,8 @@ const HospFull = props => {
   }
 
   const onChange = task => {
+    //
+    console.log(task, 'TASKSSSSSS')
     const newTasks = clone(tasks)
     const oldTask = tasks.find(v => {
       return v.name === task.name

@@ -54,6 +54,7 @@ class MetaData extends React.PureComponent {
         name: this.props.name,
         value: data
       })
+      console.log(value, 'VALGGGGGGGGGGGGGGG')
     }
   }
 
@@ -94,12 +95,14 @@ class MetaData extends React.PureComponent {
   }
 
   handleChange(event) {
-    console.log(event.index, 'INDEX')
-    // передаём объект, внутри которого лежит name - выбранный пункт
-    let index = event.index // у выбранного пунка есть свой индекс
+    // получаем наш вопрос, точнее и его индекс в цикле map()
+
+    console.log(event, 'EVENTMETADATA')
+
+    let index = event.index // у каждого вопроса в цикле есть индекс по порядку!
     if (index >= 0) {
-      let data = clone(this.state.data)
-      data[index] = event.value
+      let data = clone(this.state.data) // клонируем нужный вопрос из списка вопросов info.inspection
+      data[index] = event.value // изменяем data.list на новый data.list с выбранными пунками или данными
       this.setState({ data: data }, () => {
         if (this.props.nested) {
           this.change(data)
@@ -137,7 +140,7 @@ class MetaData extends React.PureComponent {
           return this.check(v) ? (
             <Meta
               key={i}
-              index={i}
+              index={i} // передаём индекс по пордяку каждого вопроса по циклу
               style={ms}
               value={v} // передаём объект с данными и проходимя по ним по порядку)
               onChange={this.handleChange}
