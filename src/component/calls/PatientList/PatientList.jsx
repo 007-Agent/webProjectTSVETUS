@@ -62,6 +62,7 @@ class PatientList extends React.Component {
         target: 'patients'
       })
     })
+    
   }
 
   handleButtonClick() {
@@ -86,6 +87,7 @@ class PatientList extends React.Component {
 
   handlePatientClick(event) {
     this.setState({ index: event.index })
+    // console.log(this.state.patients, 'PATIENTS')
   }
 
   render() {

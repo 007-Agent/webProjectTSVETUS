@@ -37,7 +37,7 @@ class Meta extends React.Component {
   }
 
   change(value) {
-    // передаём массив с выбранными пунктами(объекты внутри)
+    // передаём нужный объект вопроса с новыми данными data.list
     // Обновляет родительский компонент с новыми данными.
     console.log(value, 'VALUEMETA')
     if (this.props.onChange) {
@@ -75,7 +75,7 @@ class Meta extends React.Component {
 
       let value = clone(this.props.value) // клонируем один вопрос нужный с данными если они там есть уже
       value.data.list = event.value.slice()
-      console.log(value, 'VALUEFIRSTMETA')
+
       this.change(value)
     }
   }
@@ -85,7 +85,7 @@ class Meta extends React.Component {
     if (this.props.onChange) {
       // если функция передана через пропсы то...
       let value = clone(this.props.value)
-      console.log(value.data.list, 'hLIIIST')
+      console.log(value.data.list, 'VALUE DATA LIST')
       value.data.list = []
       if (event.value && event.value.trim() !== '') {
         value.data.list.push({ id: null, order: 0, name: event.value })

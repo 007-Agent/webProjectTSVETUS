@@ -36,7 +36,8 @@ const HospShort = props => {
         </div>
         <div style={style.age}>{info.age}</div>
         <div style={style.stay}>
-          Пребывание с {cutDate(dateIn)} по {strDate(dateOut)}
+          Пребывание с {cutDate(dateIn)} по {strDate(dateOut)}{' '}
+          ddddedededdededddede
         </div>
       </div>
     )

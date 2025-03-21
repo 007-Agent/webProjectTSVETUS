@@ -166,6 +166,7 @@ class Temperature extends React.PureComponent {
       this.notify(this.save, this.cancel)
     })
   }
+  
 
   render() {
     const style = merge(styles, this.props.style)

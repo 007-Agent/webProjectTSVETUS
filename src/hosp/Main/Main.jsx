@@ -6,8 +6,10 @@ import { TSide, TTop, TLogin, merge } from 'tinput'
 import Table from 'component/hosp/Table'
 import HospList from 'component/hosp/HospList'
 import PatientList from 'component/calls/PatientList'
-
+import MedicForms from '../../component/MedicForms/MedicForms/MedicForms.jsx'
 import styles from './styles.js'
+import { Outlet } from 'react-router-dom'
+// import { Outlet } from 'react-router-dom'
 
 class Main extends React.Component {
   constructor(props) {
@@ -19,7 +21,8 @@ class Main extends React.Component {
       caption: '',
       show: [],
       number: null,
-      car: null
+      car: null,
+      id: null
     }
     this.handleMenu = this.handleMenu.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
@@ -30,6 +33,8 @@ class Main extends React.Component {
     this.handleRoute = this.handleRoute.bind(this)
     this.handleCloseRoute = this.handleCloseRoute.bind(this)
     this.handleFail = this.handleFail.bind(this)
+    this.onClick = this.onClick.bind(this)
+    this.handleCloseMedicForms = this.handleCloseMedicForms.bind(this)
   }
 
   componentDidMount() {
@@ -61,7 +66,12 @@ class Main extends React.Component {
   handleTools(tools) {
     this.setState({ tools: tools })
   }
-
+  onClick = id => {
+    this.setState({ id: id })
+  }
+  handleCloseMedicForms = () => {
+    this.setState({ id: null }) // или 0, в зависимости от ваших требований
+  }
   handleCaption(caption) {
     this.setState({ caption: caption })
   }
@@ -115,6 +125,7 @@ class Main extends React.Component {
           user={this.props.user}
           onTools={this.handleTools}
           onCaption={this.handleCaption}
+          onClick={this.onClick}
         />
       )
     } else if (this.state.page === 'patient') {
@@ -127,7 +138,6 @@ class Main extends React.Component {
         />
       )
     }
-
     let items = [
       { name: 'hosp', caption: 'Статкарта' },
       {},
@@ -149,7 +159,7 @@ class Main extends React.Component {
     )
 
     return (
-      <div>
+      <div style={style.main}>
         <TSide
           style={style.side}
           name={'sideMenu'}
@@ -166,8 +176,12 @@ class Main extends React.Component {
           tools={this.state.tools}
           onClick={this.handleMenu}
         />
-
-        {content}
+        {/* {content} */}
+        {this.state.id ? (
+          <MedicForms onClose={this.handleCloseMedicForms} id={this.state.id} user={this.props.user}/> // Передаем обработчик закрытия
+        ) : (
+          content
+        )}
 
         <TLogin
           name={'loginForm'}
@@ -193,7 +207,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  store: PropTypes.object.isRequired,
+  // store: PropTypes.object.isRequired,
   user: PropTypes.object,
   wait: PropTypes.any,
   onLogin: PropTypes.func.isRequired,

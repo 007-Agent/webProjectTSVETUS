@@ -84,7 +84,6 @@ class Ref extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event, 'EVENT')
     // обрабатывает изменения в списке и вызывает переданный коллбек onChange, если он есть.
     if (this.props.onChange) {
       this.props.onChange(event)
@@ -94,7 +93,10 @@ class Ref extends React.Component {
   updateRef(items) {
     // обновляет состояние items, если компонент все еще смонтирован.
     if (this.mounted) this.setState({ items })
-    // console.log(items, 'ITEEEMS') // рендерим пункты для клика, точнее список вариантов. Массив в котром лежат все списки для вопросников!
+    console.log(items, 'ITEEEMS')
+    console.log(this.props.name, 'NNNNNNNNNNNNNNNNN')
+    console.log(this.props.label, 'LABEL')
+    console.log(this.props.caption, 'CAPPPPP') // рендерим пункты для клика, точнее список вариантов. Массив в котром лежат все списки для вопросников!
   }
 
   render() {

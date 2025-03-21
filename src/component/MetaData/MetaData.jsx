@@ -54,7 +54,6 @@ class MetaData extends React.PureComponent {
         name: this.props.name,
         value: data
       })
-      console.log(value, 'VALGGGGGGGGGGGGGGG')
     }
   }
 
@@ -136,7 +135,7 @@ class MetaData extends React.PureComponent {
     const content = this.state.data ? ( // если есть data то .....
       this.state.show ? ( // если state.show === true то.....
         this.state.data.map((v, i) => {
-          // console.log(v, 'v') // передаём каждый элемент в массиве
+          // console.log(v, 'v') // передаём каждый элемент вопроса в массиве
           return this.check(v) ? (
             <Meta
               key={i}

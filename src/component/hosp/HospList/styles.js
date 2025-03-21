@@ -7,13 +7,15 @@ export default {
       flexDirection: 'column'
     }
   },
+  patientinfo: {},
 
   params: {
     container: {
       display: 'flex',
-      justifyContent: 'flex-end',
-      flexWrap: 'wrap',
-      width: '100%'
+      textAlign: 'right',
+      justifyContent: 'space-between',
+      alignUtems: 'center',
+      padding: '0 100px'
     },
     type: {
       container: {
@@ -31,6 +33,18 @@ export default {
   },
 
   scroll: {},
+
+  mainpatient: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    maxHeight: '750px', // Установите максимальную высоту
+    overflowY: 'auto', // Включите вертикальную прокрутку
+    border: '1px solid #ccc', // Опционально: добавьте границу
+    padding: '10px', // Опционально: добавьте отступы
+    borderTop: 'none',
+    borderLeft: 'none'
+  },
 
   ribbon: {
     container: {
