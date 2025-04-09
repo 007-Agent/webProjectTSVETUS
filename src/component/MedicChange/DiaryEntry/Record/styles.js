@@ -5,7 +5,8 @@ const getStyles = () => {
     record__main: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '5px'
+      gap: '5px',
+      marginBottom: '20px'
     },
     record__input: {
       boxSizing: 'border-box',
@@ -13,14 +14,14 @@ const getStyles = () => {
       outline: 'none',
       whiteSpace: 'normal',
       overflow: 'hidden',
-      minHeight: '38px',
+      height: '38px',
       padding: '4px 4px 2px',
       border: '1px solid rgba(108, 167, 176, 0.5)',
       color: 'rgb(0, 0, 0)',
       textAlign: 'left',
       fontFamily: 'Arial',
-      fontSize: '24px',
-      width: isMobile ? '600px' : '860px'
+      fontSize: '22px',
+      width: '100%'
     },
     record__date: {
       display: 'flex',
@@ -70,6 +71,40 @@ const getStyles = () => {
       fontSize: '18px',
       opacity: '1',
       width: '140px'
+    },
+    targetElement: {
+      // Changed the key to a generic name, but you can rename it appropriately.
+      boxSizing: 'border-box',
+      flex: '1 0 0%',
+      outline: 'none',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      minHeight: '0px',
+      padding: '4px 4px 2px',
+      border: 'none',
+      color: 'rgb(108, 167, 176)',
+      textAlign: 'left',
+      fontFamily: 'Arial',
+      fontSize: '22px'
+    },
+    span: {
+      // Rename this appropriately
+      boxSizing: 'border-box',
+      outline: 'none',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      padding: '4px 4px 2px',
+      border: 'none',
+      color: 'rgb(108, 167, 176)',
+      textAlign: 'left',
+      fontSize: '22px'
+    },
+    buttonInfo: {
+      display: 'flex',
+
+      alignItems: 'center',
+      gap: '0 30px',
+      marginTop: '20px'
     }
   }
 }

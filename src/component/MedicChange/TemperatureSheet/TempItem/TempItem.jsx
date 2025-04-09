@@ -300,6 +300,7 @@ export const TempItem = props => {
           </tr>
         </tbody>
       </table>
+      <div style={style.buttonList}>
       {isTextModified && ( // Проверяем, изменился ли текст и есть ли текст в поле
         <button onClick={save} style={style.click__save}>
           Сохранить
@@ -311,6 +312,8 @@ export const TempItem = props => {
             Отмена
           </button>
         )}
+      </div>
+      
     </div>
   )
 }

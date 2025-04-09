@@ -109,7 +109,7 @@ export const Record = props => {
   }
   function HandleInfoDelete(event) {
     if (props.onDelete) {
-      props.onDelete({ key: event.key });
+      props.onDelete({ key: event.key })
     }
   }
 
@@ -152,12 +152,12 @@ export const Record = props => {
 
   return (
     <>
-      <div className='record__content'>
+      <div style={styles.record__main}>
         <div style={styles.record__date}>
           <div style={styles.record__date}>
-            <h3>Дата: </h3>
-            <span>{obj.date}</span>
-            <span>{obj.time}</span>
+            <h3 style={styles.targetElement}>Дата: </h3>
+            <span style={styles.span}>{obj.date}</span>
+            <span style={styles.span}>{obj.time}</span>
           </div>
           <p>{props.user.name}</p>
         </div>
@@ -168,25 +168,26 @@ export const Record = props => {
           style={styles.record__input}
           placeholder='Напишите запись'
           onChange={handleChange}
+          onInput={e => {
+            e.target.style.height = '38px' // Сброс высоты
+            e.target.style.height = `${e.target.scrollHeight}px` // Установка высоты на основе прокрутки
+          }}
         />
         {/* <button onClick={handleSubmit} style={styles.button}>
             Сохранить
           </button> */}
-        {isTextModified &&
-          text && ( 
-            // Проверяем, изменился ли текст и есть ли текст в поле
-            <div>
-                <button onClick={handleSubmit} style={styles.button}>
+        {isTextModified && text && (
+          // Проверяем, изменился ли текст и есть ли текст в поле
+          <div style={styles.buttonInfo}>
+            <button onClick={handleSubmit} style={styles.button}>
               Сохранить
             </button>
             <button onClick={HandleInfoDelete} style={styles.button}>
               Удалить
             </button>
-            </div>
-            
-          )}
+          </div>
+        )}
       </div>
-     
     </>
   )
 }

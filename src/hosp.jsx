@@ -10,7 +10,7 @@ import { registerStyles, check, INITIAL_STATE, reducer } from 'tinput'
 registerStyles(styles, templates)
 
 import Main from 'hosp/Main'
-import MedicForms from './component/MedicForms/MedicForms/MedicForms'
+// import MedicForms from './component/MedicForms/MedicForms/MedicForms'
 import { Provider } from 'react-redux'
 
 let store = createStore(

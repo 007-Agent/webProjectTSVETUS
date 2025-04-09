@@ -125,7 +125,7 @@ export const TemperatureSheet = props => {
 
   return (
     <div style={styles.diary__temp}>
-      <div>
+      <div >
         <h2 style={styles.title}>
           Лист регистрации показателей жизненно важных функций организма
         </h2>

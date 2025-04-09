@@ -1,24 +1,21 @@
-import { templates } from 'styles'
 const getStyles = () => {
   const isMobile = window.innerWidth <= 800
-
+  const isWidth = window.innerWidth <= 960
   return {
-     
     title: {
       display: 'flex',
       justifyContent: 'center',
       color: 'rgb(108, 167, 176)',
       textAlign: 'center',
       fontFamily: 'Arial',
-      fontSize: isMobile ? '25px' : '30px',
-      marginBottom: '30px',
-      
+      fontSize: isWidth ? '25px' : '30px',
+      marginBottom: '30px'
     },
     diary__temp: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      maxWidth: isMobile ? '764px' : '1100px',
+      maxWidth: isWidth ? '850px' : '1100px',
 
       margin: '0 auto'
     },
@@ -27,6 +24,7 @@ const getStyles = () => {
       display: 'flex',
       justifyContent: 'center',
       flexFlow: 'column wrap',
+      maxWidth: isWidth ? '865px' : '1100px',
       padding: '16px',
       border: '1px solid rgb(108, 167, 176)',
       flex: '1 1 0%',

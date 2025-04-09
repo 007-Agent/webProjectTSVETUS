@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './styles'
+
 import { CiCirclePlus } from 'react-icons/ci'
 import { Record } from '../DiaryEntry/Record/Records'
 import { DiTypo3 } from 'react-icons/di'

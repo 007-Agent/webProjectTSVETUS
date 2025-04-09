@@ -1,6 +1,6 @@
 const getStyles = () => {
   const isMobile = window.innerWidth <= 800
-
+  const isMobile840 = window.innerWidth <= 960
   return {
     title: {
       display: 'flex',
@@ -14,7 +14,7 @@ const getStyles = () => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      maxWidth: isMobile ? '764px' : '900px',
+      maxWidth: isMobile840 ? '865px' : '900px',
 
       margin: '0 auto'
     },
@@ -27,7 +27,9 @@ const getStyles = () => {
       border: '1px solid rgb(108, 167, 176)',
       flex: '1 1 0%',
       borderRadius: '8px',
-      minHeight: '50px'
+      minHeight: '50px',
+      maxWidth: isMobile840 && '750px',
+      margin: isMobile840 && '0 auto'
     },
     diary__plus: {
       display: 'flex',

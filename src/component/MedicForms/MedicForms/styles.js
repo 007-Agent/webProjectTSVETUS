@@ -23,11 +23,12 @@ const getStyles = () => {
       color: 'rgb(108, 167, 176)',
       fontSize: '24px',
       cursor: 'pointer',
-      marginBottom: '80px',
+      marginBottom: '65px',
       backgroundImage:
         'linear-gradient(rgb(209, 214, 220), rgb(255, 255, 255))',
       paddingTop: '50px',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontFamily: 'Arial'
     },
     mediccontent: {
       display: 'flex',
@@ -39,6 +40,16 @@ const getStyles = () => {
       fontFamily: 'Arial',
       fontSize: isMobile ? '16px' : '24px', // Адаптивный размер шрифта для содержимого
       padding: '16px'
+    },
+    fioName: {
+      cursor: 'default',
+      padding: '4px 8px 0px 0px',
+      border: 'none',
+      color: 'rgb(134, 40, 12)',
+      outline: 'none',
+      textAlign: 'center',
+
+      fontSize: '25px'
     },
     medslider: {
       display: 'flex',
@@ -67,7 +78,7 @@ const getStyles = () => {
       color: 'rgb(108, 167, 176)',
       position: 'absolute',
       right: isMobile ? '10px' : '80px',
-      top: isMobile && '-45px',
+      top: isMobile && '-45px'
     },
     select__type: {
       boxSizing: 'border-box',
@@ -86,10 +97,10 @@ const getStyles = () => {
       height: '36px'
     },
     main__form: {
-      position: 'relative'
+      position: 'relative',
+      marginBottom: '40px'
     },
     outline__info: {
-      
       color: 'brown',
       fontSize: '40px',
       textAlign: 'center',

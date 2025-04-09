@@ -130,23 +130,30 @@ export default {
       border: 'none',
       textAlign: 'center'
     },
-    click__save: {
-      cursor: 'pointer',
-      userSelect: 'none',
-      boxSizing: 'border-box',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '6px 14px',
-      backgroundColor: 'rgb(108, 167, 176)',
-      color: 'rgb(255, 255, 255)',
-      borderRadius: '8px',
-      textAlign: 'center',
-      border: '1px solid rgba(108, 167, 176, 0.5)',
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '18px',
-      opacity: 1,
-      width: '140px'
-    }
+   
+  },
+  click__save: {
+    cursor: 'pointer',
+    userSelect: 'none',
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '6px 14px',
+    backgroundColor: 'rgb(108, 167, 176)',
+    color: 'rgb(255, 255, 255)',
+    borderRadius: '8px',
+    textAlign: 'center',
+    border: '1px solid rgba(108, 167, 176, 0.5)',
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '18px',
+    opacity: 1,
+    width: '140px'
+  },
+  buttonList: {
+    display: 'flex',
+    
+    gap: '0 30px',
+    marginTop: '30px'
   }
 }
