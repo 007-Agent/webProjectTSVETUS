@@ -107,6 +107,7 @@ export const Question = props => {
       console.log(value, 'dataList')
       content = (
         <ListType
+        v={data}
           id={props.v.data.id}
           value={value}
           onChange={handleRefChange}

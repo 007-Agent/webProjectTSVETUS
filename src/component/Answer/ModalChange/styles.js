@@ -11,8 +11,7 @@ const getStyles = () => {
       width: '100%',
       borderRadius: '10px',
       zIndex: 999,
-      position: 'absolute',
-      top: '172px'
+      
     },
     modal__list: {
       display: 'flex',

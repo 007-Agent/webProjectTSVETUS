@@ -5,6 +5,7 @@ export const ModalChange = props => {
   const v = props.v
 
   const handleChange = (event, index) => {
+    
     // обрабатывает изменения в списке и вызывает переданный коллбек onChange, если он есть.
     console.log(event)
     if (props.onClick) {

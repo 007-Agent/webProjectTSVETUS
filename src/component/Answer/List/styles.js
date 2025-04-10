@@ -89,19 +89,28 @@ const getStyles = () => {
       cursor: 'pointer',
       margin: '0 0 0 4px'
     },
-    list__text:{
+    list__text: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       margin: '8px 0',
       fontFamily: 'Arial',
       fontSize: '24px',
-      textAlign: 'right',
+      textAlign: 'right'
     },
-    title:{
+    title: {
       flex: '1 1 auto',
       width: '100%',
-      margin: '0 16px 0 0',
+      margin: '0 16px 0 0'
+    },
+    minus: {
+      boxSizing: 'border-box',
+      width: '32px',
+      height: '32px',
+      color: 'rgb(221, 34, 34)',
+
+      flexGrow: 0,
+      cursor: 'pointer'
     }
   }
 }

@@ -3,6 +3,7 @@ import { FaPlusCircle } from 'react-icons/fa'
 import styles from './styles'
 import { ModalChange } from '../ModalChange/ModalChange'
 import axios from 'axios'
+import { FiMinusCircle } from 'react-icons/fi'
 
 const REF_URL_META = '/rest/meta/results' // URL для получения данных о справочниках.
 const REF_URL_TABLE = '/rest/pol/ref'
@@ -11,7 +12,7 @@ export const ListType = props => {
   const [valueNew, setValue] = useState(props.value)
   console.log(valueNew, 'PROPEEER')
   const v = props.v
-  console.log(props.value, 'PROPEEER')
+  // console.log(props.value, 'PROPEEER121212')
   const [items, setItems] = useState([])
 
   const [isLoading, setIsLoading] = useState(false)
@@ -98,9 +99,28 @@ export const ListType = props => {
           data: '',
           value: value
         })
+        setIsLoading(false)
       }
 
       console.log(value, '????')
+    }
+  }
+  const handleDelete = event => {
+    console.log(event, 'DELETE')
+    let index = event
+    console.log(index)
+    if (index >= 0) {
+      let value = clone(valueNew)
+      console.log(value, 'valuedelete')
+      value = valueNew.filter((_, i) => i !== index)
+      setValue(value)
+      if (props.onChange) {
+        props.onChange({
+          name: '',
+          data: '',
+          value: value
+        })
+      }
     }
   }
 
@@ -116,6 +136,10 @@ export const ListType = props => {
           <div key={i} style={styles.list__text}>
             {item}
             {/* // список выбранных пунктов, рядом кнопкаудаления выбранного пунка  */}
+            <FiMinusCircle
+              style={styles.minus}
+              onClick={() => handleDelete(i)}
+            />
           </div>
         )
       })
@@ -124,7 +148,7 @@ export const ListType = props => {
   console.log(items)
   return (
     <div style={styles.list__form}>
-      <div style={styles.list__title}>цщапцушацуштацуат:</div>
+      <div style={styles.list__title}>{props.v.name}</div>
 
       <div style={styles.list__full}>
         {list}
