@@ -73,6 +73,14 @@ export const Question = props => {
       change(value)
     }
   }
+  // const handleRefChange = event => {
+  //   console.log(event, 'ТУТАТАТА')
+  //   if (props.onChange) {
+  //     let value = clone(props.v)
+  //     value.data.list = event.value.slice()
+  //     change(value)
+  //   }
+  // }
   const handleRefChange = event => {
     console.log(event, 'ТУТАТАТА')
     if (props.onChange) {
@@ -96,10 +104,9 @@ export const Question = props => {
       content = <MiniText v={data} onChange={handleTextChange} />
     } else if (data.type === 7) {
       let value = data.list
-      console.log(value, "dataList")
+      console.log(value, 'dataList')
       content = (
         <ListType
-          v={data}
           id={props.v.data.id}
           value={value}
           onChange={handleRefChange}

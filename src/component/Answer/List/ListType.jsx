@@ -8,9 +8,12 @@ const REF_URL_META = '/rest/meta/results' // URL для получения да�
 const REF_URL_TABLE = '/rest/pol/ref'
 
 export const ListType = props => {
+  const [valueNew, setValue] = useState(props.value)
+  console.log(valueNew, 'PROPEEER')
   const v = props.v
   console.log(props.value, 'PROPEEER')
   const [items, setItems] = useState([])
+
   const [isLoading, setIsLoading] = useState(false)
 
   const clone = (source, exclude) => {
@@ -40,6 +43,10 @@ export const ListType = props => {
     }
     return dest
   }
+
+  React.useEffect(() => {
+    setValue(props.value || [])
+  }, [props.value])
 
   const fetchData = async () => {
     let params = {}
@@ -77,18 +84,23 @@ export const ListType = props => {
 
   const handleRefChange = event => {
     console.log(event, 'Что передали!')
+
     if (event.item && event.index >= 0) {
-      let value = props.value ? clone(props.value) : []
-      console.log(props.v, 'ЗНАЧЕНИЕ')
+      let value = clone(valueNew)
+      console.log(props.value, 'ЗНАЧЕНИЕ')
       value.push(event.item)
+      console.log(value, 'EVIIIIIIIIIIIIIIIIIIIIIIIIMT')
       console.log(event.item, 'EVIIIIIIIIIIIIIIIIIIIIIIIIMT')
+      setValue(value)
       if (props.onChange) {
         props.onChange({
-          name: v.name,
-          data: v.data,
+          name: '',
+          data: '',
           value: value
         })
       }
+
+      console.log(value, '????')
     }
   }
 
@@ -96,8 +108,8 @@ export const ListType = props => {
     setIsLoading(!isLoading)
   }
 
-  let list = props.value
-    ? props.value.map((v, i) => {
+  let list = valueNew
+    ? valueNew.map((v, i) => {
         let item = <div style={styles.title}>{v.name}</div>
 
         return (
@@ -108,11 +120,11 @@ export const ListType = props => {
         )
       })
     : null
-
+  console.log(valueNew, 'LISTIK')
   console.log(items)
   return (
     <div style={styles.list__form}>
-      <div style={styles.list__title}>{props.v.name}:</div>
+      <div style={styles.list__title}>цщапцушацуштацуат:</div>
 
       <div style={styles.list__full}>
         {list}
