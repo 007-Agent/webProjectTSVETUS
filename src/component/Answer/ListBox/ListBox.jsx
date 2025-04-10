@@ -4,11 +4,12 @@ import styles from './styles'
 import { ModalChange } from '../ModalChange/ModalChange'
 import axios from 'axios'
 import { FiMinusCircle } from 'react-icons/fi'
+import { ModalBox } from './ModalBox/ModalBox'
 
 const REF_URL_META = '/rest/meta/results' // URL для получения данных о справочниках.
 const REF_URL_TABLE = '/rest/pol/ref'
 
-export const ListType = props => {
+export const ListBox = props => {
   const [valueNew, setValue] = useState(props.value)
   console.log(valueNew, 'PROPEEER')
   const v = props.v
@@ -105,6 +106,11 @@ export const ListType = props => {
       console.log(value, '????')
     }
   }
+
+  const handleCloseModal = () => {
+    setIsLoading(false)
+  }
+
   const handleDelete = event => {
     console.log(event, 'DELETE')
     let index = event
@@ -162,7 +168,13 @@ export const ListType = props => {
         </div>
       </div>
       {isLoading && (
-        <ModalChange items={items} v={v} onClick={handleRefChange} list={valueNew}/>
+        <ModalBox
+          items={items}
+          v={v}
+          onClick={handleRefChange}
+          list={valueNew}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   )

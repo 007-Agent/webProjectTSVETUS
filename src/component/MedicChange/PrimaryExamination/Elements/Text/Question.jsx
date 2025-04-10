@@ -3,6 +3,7 @@ import styles from './styles'
 import { Text } from '../../../../Answer/Text/Text'
 import { MiniText } from '../../../../Answer/MiniText/MiniText'
 import { ListType } from '../../../../Answer/List/ListType'
+import { ListBox } from '../../../../Answer/ListBox/ListBox'
 // import List from '../../../../List/List'
 // import { setText } from "../../../../../redux/InfoTitle";
 export const Question = props => {
@@ -107,6 +108,17 @@ export const Question = props => {
       console.log(value, 'dataList')
       content = (
         <ListType
+        v={data}
+          id={props.v.data.id}
+          value={value}
+          onChange={handleRefChange}
+        />
+      )
+    } else if (data.type === 6) {
+      let value = data.list
+      console.log(value, 'dataListBOX')
+      content = (
+        <ListBox
         v={data}
           id={props.v.data.id}
           value={value}
