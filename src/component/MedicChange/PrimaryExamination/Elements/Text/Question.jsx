@@ -101,25 +101,25 @@ export const Question = props => {
     console.log(data, 'TYPE')
     if (data.type === 4) {
       content = <Text v={data} onChange={handleTextChange} />
-    } else if (data.type === 1) {
+    } else if (data.type === 2) {
       content = <MiniText v={data} onChange={handleTextChange} />
-    } else if (data.type === 7) {
+    } else if (data.type === 1) {
       let value = data.list
       console.log(value, 'dataList')
       content = (
         <ListType
-        v={data}
+          v={data}
           id={props.v.data.id}
           value={value}
           onChange={handleRefChange}
         />
       )
-    } else if (data.type === 6) {
+    } else if (data.type === 7) {
       let value = data.list
       console.log(value, 'dataListBOX')
       content = (
         <ListBox
-        v={data}
+          v={data}
           id={props.v.data.id}
           value={value}
           onChange={handleRefChange}

@@ -22,8 +22,9 @@ const getStyles = () => {
     modal__list: {
       display: 'flex',
       flexDirection: 'column',
-       gap: '5px 0',
-      overflowY: 'auto' // Вертикальная прокрутка
+      gap: '5px 0',
+      overflowY: 'auto', // Вертикальная прокрутка
+      padding: '0 5px'
     },
     item: {
       cursor: 'pointer',
@@ -46,9 +47,10 @@ const getStyles = () => {
       maxHeight: '80%', // Ограничиваем максимальную высоту
       overflowY: 'auto', // Вертикальная прокрутка
       border: '1px solid #ccc', // Для визуального разделения
-      padding: '10px',
-      backgroundColor: 'rgb(209, 214, 220',
-      width: '500px'
+
+      backgroundColor: 'rgb(247, 247, 247',
+      width: '500px',
+      padding: '20px 5px'
     },
     top__test: {
       display: 'flex',
@@ -70,14 +72,12 @@ const getStyles = () => {
       fontFamily: 'Arial',
       fontSize: '22px'
     },
-    icon : {
+    icon: {
       width: '40px',
       height: '40px',
       cursor: 'pointer',
-     
-      color: 'rgb(108, 167, 176)',
-      
-      
+
+      color: 'rgb(108, 167, 176)'
     }
   }
 }

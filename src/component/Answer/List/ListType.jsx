@@ -162,7 +162,12 @@ export const ListType = props => {
         </div>
       </div>
       {isLoading && (
-        <ModalChange items={items} v={v} onClick={handleRefChange} list={valueNew}/>
+        <ModalChange
+          items={items}
+          v={v}
+          onClick={handleRefChange}
+          list={valueNew}
+        />
       )}
     </div>
   )

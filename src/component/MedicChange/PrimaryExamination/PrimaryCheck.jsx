@@ -7,7 +7,7 @@ import { Question } from './Elements/Text/Question'
 
 export const PrimaryCheck = props => {
   const [currentComponent, setCurrentComponent] = useState(null)
-
+  const [result, setResult] = useState(false)
   const [data2, setData] = useState(props.data)
   const data = props.data
 
@@ -24,19 +24,19 @@ export const PrimaryCheck = props => {
     switch (componentType) {
       case 'complaints':
         startIndex = 0
-        endIndex = 10
+        endIndex = 7
         break
       case 'medicalHistory':
-        startIndex = 10
-        endIndex = 25
+        startIndex = 8
+        endIndex = 22
         break
       case 'generalHistory':
-        startIndex = 25
-        endIndex = 84
+        startIndex = 23
+        endIndex = 73
         break
       case 'resultHistory':
-        startIndex = 85
-        endIndex = 89
+        startIndex = 74
+        endIndex = 79
         break
       default:
         questions = []
@@ -75,6 +75,7 @@ export const PrimaryCheck = props => {
       console.log(data2[index], 'INDEX')
       console.log(data2, 'DATA#222')
       setData(data2)
+      setResult(true)
     }
   }
   console.log(data2, 'MAIN CHECK')
@@ -123,9 +124,11 @@ export const PrimaryCheck = props => {
         </button>
       </div>
       <div style={styles.primaryContent}>{currentComponent}</div>
-      <button onClick={handleClickSave} style={styles.button__save}>
-        Сохранить
-      </button>
+      {result && (
+        <button onClick={handleClickSave} style={styles.button__save}>
+          Сохранить
+        </button>
+      )}
     </div>
   )
 }

@@ -51,7 +51,14 @@ function MedicForms(props) {
         />
       )
     } else if (index === '2') {
-      setSelectedComponent(<DoctorExamination project={PROJECT} />)
+      setSelectedComponent(
+        <DoctorExamination
+          project={PROJECT}
+          user={props.user}
+          data={info.secondcheck}
+          name={'temperature'}
+        />
+      )
     } else if (index === '3') {
       setSelectedComponent(
         <TemperatureSheet
@@ -107,7 +114,7 @@ function MedicForms(props) {
           )}
           <MdClear style={styles.icon} onClick={props.onClose} />
         </div>
-       {isLoading && <Info info={info}/>}
+        {isLoading && <Info info={info} />}
         {isLoading && selectedComponent}
       </div>
     </>
