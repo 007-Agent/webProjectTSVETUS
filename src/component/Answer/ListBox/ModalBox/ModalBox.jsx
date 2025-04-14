@@ -19,7 +19,7 @@ export const ModalBox = props => {
   const handleClickMenu = () => {}
 
   return (
-    <div style={styles.modal__main}>
+    <div style={styles.modal__main} onClick={props.onClose}>
       <div style={styles.content}>
         <div style={styles.top__test}>
           <h2 style={styles.targetElement}>Выбери пункт</h2>

@@ -31,7 +31,7 @@ const getStyles = () => {
       outline: 'none',
       textAlign: 'left',
       fontFamily: 'Arial',
-      fontSize: '24px',
+      fontSize: '21px',
       display: 'inline',
       opacity: 1,
       zIndex: 1,
