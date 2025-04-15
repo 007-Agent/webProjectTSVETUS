@@ -98,7 +98,7 @@ const getStyles = () => {
     },
     main__form: {
       position: 'relative',
-      marginBottom: '40px'
+      marginBottom: '100px'
     },
     outline__info: {
       color: 'brown',

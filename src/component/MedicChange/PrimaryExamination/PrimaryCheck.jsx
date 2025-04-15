@@ -4,7 +4,7 @@ import axios from 'axios'
 // Импортируем Text компонент
 import styles from './styles'
 import { Question } from './Elements/Text/Question'
-
+import { FaArrowAltCircleUp } from 'react-icons/fa'
 export const PrimaryCheck = props => {
   const [currentComponent, setCurrentComponent] = useState(null)
   const [result, setResult] = useState(false)
@@ -80,6 +80,10 @@ export const PrimaryCheck = props => {
   }
   console.log(data2, 'MAIN CHECK')
 
+  const handleScrollClick = () => {
+    window.scrollTo(110, 110)
+  }
+
   const handleClickSave = () => {
     axios
       .post(`/rest/${props.project}/${props.name}/update`, {
@@ -124,11 +128,20 @@ export const PrimaryCheck = props => {
         </button>
       </div>
       <div style={styles.primaryContent}>{currentComponent}</div>
+
       {result && (
         <button onClick={handleClickSave} style={styles.button__save}>
           Сохранить
         </button>
       )}
+      <FaArrowAltCircleUp style={styles.marker} onClick={handleScrollClick} />
+
+      {/* {result && (
+        <button onClick={handleClickSave} style={styles.button__save}>
+          Сохранить
+        </button>
+      )}
+      <FaArrowAltCircleUp /> */}
     </div>
   )
 }

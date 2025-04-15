@@ -35,11 +35,13 @@ const getStyles = () => {
       display: 'flex',
       fontSize: '24px',
 
-      marginBottom: '-11px',
-      marginTop: '15px',
+      
+      marginTop: '10px',
       fontStyle: 'italic',
       color: 'rgb(134, 40, 12)',
-      paddingLeft: '15px'
+      paddingLeft: '15px',
+
+      marginBottom: '-10px'
     },
 
     buttonForm: {
@@ -72,7 +74,8 @@ const getStyles = () => {
     primaryContent: {
       display: 'flex',
       flexDirection: 'column',
-      marginBottom: '15px'
+      marginBottom: '15px',
+      position: 'relative'
     },
     button__save: {
       cursor: 'pointer',
@@ -92,6 +95,22 @@ const getStyles = () => {
       opacity: 1,
       width: '138px',
       marginLeft: '15px'
+    },
+    content__up: {
+      // display: 'flex',
+
+      // justifyContent: 'space-between',
+      // alignItems: 'center',
+      position: 'relative'
+    },
+    marker: {
+      position: 'absolute',
+      right: '64px',
+      bottom: '-76px',
+
+      width: '46px',
+      height: '46px',
+      color: 'rgb(108, 167, 176)'
     }
   }
 }

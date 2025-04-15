@@ -11,7 +11,8 @@ const getStyles = () => {
       border: 'none',
       margin: '8px 0',
       padding: '0',
-      width: '100%'
+      width: '100%',
+      marginTop: '14px'
     },
     list__full: {
       display: 'flex',
