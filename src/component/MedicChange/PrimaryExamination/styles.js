@@ -35,7 +35,6 @@ const getStyles = () => {
       display: 'flex',
       fontSize: '24px',
 
-      
       marginTop: '10px',
       fontStyle: 'italic',
       color: 'rgb(134, 40, 12)',
@@ -105,12 +104,32 @@ const getStyles = () => {
     },
     marker: {
       position: 'absolute',
-      right: '64px',
+      right: '132px',
       bottom: '-76px',
-
+      cursor: 'pointer',
       width: '46px',
       height: '46px',
       color: 'rgb(108, 167, 176)'
+    },
+    saving: {
+      fontSize: '24px',
+      fontStyle: 'italic',
+      color: 'rgb(134, 40, 12)',
+
+      boxSizing: 'border-box', // Можете оставить для общего стиля
+      cursor: 'default',
+      border: 'none',
+      outline: 'none',
+      textAlign: 'left',
+      fontFamily: 'Arial',
+      display: 'inline',
+      opacity: 1,
+      zIndex: 1
+    },
+    result__save: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0 30px'
     }
   }
 }

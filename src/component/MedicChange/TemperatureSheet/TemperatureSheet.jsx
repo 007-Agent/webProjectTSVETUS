@@ -3,6 +3,7 @@ import styles from './styles'
 import { CiCirclePlus } from 'react-icons/ci'
 import { Record } from '../DiaryEntry/Record/Records'
 import { DiTypo3 } from 'react-icons/di'
+import { nanoid } from 'nanoid'
 // import Temperature from '../../MetaRecords/Temperature/Temperature'
 import TempItem from './TempItem/TempItem'
 export const TemperatureSheet = props => {
@@ -74,7 +75,7 @@ export const TemperatureSheet = props => {
     if (found) {
       const current = new Date()
       const newRecord = {
-        key: crypto.randomUUID(),
+        key: nanoid(),
         name: JSON.stringify({
           type: 'temperature',
           user: { id: props.user.id, name: props.user.name },

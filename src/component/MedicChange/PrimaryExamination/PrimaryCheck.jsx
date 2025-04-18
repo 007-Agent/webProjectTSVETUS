@@ -9,6 +9,7 @@ export const PrimaryCheck = props => {
   const [currentComponent, setCurrentComponent] = useState(null)
   const [result, setResult] = useState(false)
   const [data2, setData] = useState(props.data)
+  const [save, setSave] = useState(false)
   const data = props.data
 
   // useEffect(() => {
@@ -81,7 +82,7 @@ export const PrimaryCheck = props => {
   console.log(data2, 'MAIN CHECK')
 
   const handleScrollClick = () => {
-    window.scrollTo(110, 110)
+    window.scrollTo({ top: 110, left: 110, behavior: 'smooth' })
   }
 
   const handleClickSave = () => {
@@ -91,16 +92,10 @@ export const PrimaryCheck = props => {
       })
       .then(response => {
         console.log(response.data)
+        setSave(true)
       })
-    // .then((response) => {
-    //   const clonedData = clone(response.data.data); // Клонируем данные из ответа
-    //   setData(clonedData); // Обновляем состояние
-    //   // Вызываем уведомление после обновления состояния
-    //   console.log(response.data.data, "RESUUULT"); // Логируем результат
-    // })
-    // .catch((error) => {
-    //   console.error("There was an error updating the data!", error); // Обработка ошибок
-    // });
+    setTimeout(() => setSave(false), 5000)
+    setTimeout(() => setResult(false), 5000)
   }
 
   return (
@@ -129,11 +124,14 @@ export const PrimaryCheck = props => {
       </div>
       <div style={styles.primaryContent}>{currentComponent}</div>
 
-      {result && (
-        <button onClick={handleClickSave} style={styles.button__save}>
-          Сохранить
-        </button>
-      )}
+      <div style={styles.result__save}>
+        {result && (
+          <button onClick={handleClickSave} style={styles.button__save}>
+            Сохранить
+          </button>
+        )}
+        {save && <div style={styles.saving}>Данные отправленны!</div>}
+      </div>
       <FaArrowAltCircleUp style={styles.marker} onClick={handleScrollClick} />
 
       {/* {result && (
