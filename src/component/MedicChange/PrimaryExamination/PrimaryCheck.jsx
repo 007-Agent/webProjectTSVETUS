@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
+import { BiPrinter } from 'react-icons/bi'
 import axios from 'axios'
+import { download } from 'tinput'
 // Импортируем Text компонент
 import styles from './styles'
 import { Question } from './Elements/Text/Question'
@@ -11,7 +12,7 @@ export const PrimaryCheck = props => {
   const [data2, setData] = useState(props.data)
   const [save, setSave] = useState(false)
   const data = props.data
-
+  const id = props.id
   // useEffect(() => {
   //   // Выберите тип компонента, который вы хотите отобразить по умолчанию
   //   handleShowComponent('complaints'); // Например, отображаем "Жалобы" по умолчанию
@@ -65,6 +66,72 @@ export const PrimaryCheck = props => {
     )
   }
 
+  // const clickHandlePrinter = async () => {
+  //   const url = '/rest/hosp/statcard' // Замените на ваш URL
+
+  //   try {
+  //     const response = await axios.post(url, { id }, { responseType: 'blob' }) // Указываем, что ожидаем Blob
+
+  //     if (response.status === 200) {
+  //       const blob = new Blob([response.data], { type: 'application/pdf' })
+  //       const link = document.createElement('a')
+  //       link.href = window.URL.createObjectURL(blob)
+  //       link.setAttribute('download', 'stat_card_sancur_t.docx') // Имя файла для сохранения
+  //       document.body.appendChild(link)
+  //       link.click()
+  //       document.body.removeChild(link)
+  //     }
+  //     console.log(response.data.data)
+  //   } catch (error) {
+  //     console.error('Ошибка при получении PDF:', error)
+  //   }
+  // }
+
+  const clickHandlePrinter = async () => {
+    const url = '/rest/hosp/statcard' // Замените на ваш URL
+
+    try {
+      const response = await axios.post(url, { id }) // Получаем данные
+
+      if (response.status === 200) {
+        let base64Data = response.data.data // Здесь ваш текст в формате Base64
+
+        // Проверяем, является ли base64Data строкой
+        if (typeof base64Data !== 'string') {
+          console.error('Полученные данные не являются строкой:', base64Data)
+          return
+        }
+
+        // Если строка Base64 была закодирована для URL, заменяем символы
+        base64Data = base64Data.replace(/-/g, '+').replace(/_/g, '/')
+
+        // Проверяем, что строка корректно закодирована
+        const padding = base64Data.length % 4
+        if (padding) {
+          base64Data += '='.repeat(4 - padding) // Добавляем необходимое количество символов '='
+        }
+
+        // Создаем Blob из Base64
+        const byteCharacters = atob(base64Data) // Декодируем Base64
+        const byteNumbers = new Uint8Array(byteCharacters.length)
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i)
+        }
+        const blob = new Blob([byteNumbers], { type: 'application/pdf' }) // Укажите правильный MIME-тип
+
+        // Создаем ссылку для скачивания
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.setAttribute('download', 'stat_card.pdf') // Имя файла для сохранения
+        document.body.appendChild(link)
+        link.click() // Имитируем клик для скачивания
+        document.body.removeChild(link) // Удаляем ссылку после скачивания
+      }
+    } catch (error) {
+      console.error('Ошибка при получении файла:', error)
+    }
+  }
+
   const handleChange = event => {
     console.log(event, 'propsEVENT')
     const index = event.index
@@ -100,6 +167,7 @@ export const PrimaryCheck = props => {
 
   return (
     <div style={styles.primaryMain}>
+      <BiPrinter onClick={clickHandlePrinter} />
       <div style={styles.buttonForm}>
         <button
           style={styles.button}

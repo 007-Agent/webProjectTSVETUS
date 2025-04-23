@@ -48,6 +48,7 @@ function MedicForms(props) {
           user={props.user}
           data={info.inspection}
           name={'inspection'}
+          id={props.id}
         />
       )
     } else if (index === '2') {
