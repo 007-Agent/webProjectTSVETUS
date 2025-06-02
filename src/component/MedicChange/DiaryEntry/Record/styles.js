@@ -16,7 +16,8 @@ const getStyles = () => {
       overflow: 'hidden',
       height: '38px',
       padding: '4px 4px 2px',
-      border: '1px solid rgba(108, 167, 176, 0.5)',
+      // border: '1px solid rgba(108, 167, 176, 0.5)',
+      border: 'none',
       color: 'rgb(0, 0, 0)',
       textAlign: 'left',
       fontFamily: 'Arial',
@@ -38,7 +39,7 @@ const getStyles = () => {
       minHeight: '0px',
       padding: '4px 4px 2px',
       border: 'none',
-      color: 'rgb(108, 167, 176)',
+      color: 'black',
       textAlign: 'left',
       fontFamily: 'Arial',
       fontSize: '22px'
@@ -50,7 +51,7 @@ const getStyles = () => {
       overflow: 'hidden',
       padding: '4px 4px 2px',
       border: 'none',
-      color: 'rgb(108, 167, 176)',
+      color: 'black',
       textAlign: 'left',
       fontSize: '22px'
     },
@@ -67,6 +68,7 @@ const getStyles = () => {
       borderRadius: '8px',
       textAlign: 'center',
       border: '1px solid rgba(108, 167, 176, 0.5)',
+
       fontFamily: 'Arial',
       fontSize: '18px',
       opacity: '1',
@@ -82,7 +84,7 @@ const getStyles = () => {
       minHeight: '0px',
       padding: '4px 4px 2px',
       border: 'none',
-      color: 'rgb(108, 167, 176)',
+      color: 'black',
       textAlign: 'left',
       fontFamily: 'Arial',
       fontSize: '22px'
@@ -95,13 +97,13 @@ const getStyles = () => {
       overflow: 'hidden',
       padding: '4px 4px 2px',
       border: 'none',
-      color: 'rgb(108, 167, 176)',
+      color: 'black',
       textAlign: 'left',
       fontSize: '22px'
     },
     buttonInfo: {
       display: 'flex',
-
+      maxWidth: '100px',
       alignItems: 'center',
       gap: '0 30px',
       marginTop: '20px'

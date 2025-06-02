@@ -40,7 +40,7 @@ const getStyles = () => {
       color: 'rgb(134, 40, 12)',
       paddingLeft: '15px',
 
-      marginBottom: '-10px'
+      marginBottom: '-5px'
     },
 
     buttonForm: {

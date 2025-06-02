@@ -13,6 +13,8 @@ export const PrimaryCheck = props => {
   const [save, setSave] = useState(false)
   const data = props.data
   const id = props.id
+  const newID = 33165
+  const repCoding = 'stat.card.sancur'
   // useEffect(() => {
   //   // Выберите тип компонента, который вы хотите отобразить по умолчанию
   //   handleShowComponent('complaints'); // Например, отображаем "Жалобы" по умолчанию
@@ -66,66 +68,43 @@ export const PrimaryCheck = props => {
     )
   }
 
-  // const clickHandlePrinter = async () => {
-  //   const url = '/rest/hosp/statcard' // Замените на ваш URL
-
-  //   try {
-  //     const response = await axios.post(url, { id }, { responseType: 'blob' }) // Указываем, что ожидаем Blob
-
-  //     if (response.status === 200) {
-  //       const blob = new Blob([response.data], { type: 'application/pdf' })
-  //       const link = document.createElement('a')
-  //       link.href = window.URL.createObjectURL(blob)
-  //       link.setAttribute('download', 'stat_card_sancur_t.docx') // Имя файла для сохранения
-  //       document.body.appendChild(link)
-  //       link.click()
-  //       document.body.removeChild(link)
-  //     }
-  //     console.log(response.data.data)
-  //   } catch (error) {
-  //     console.error('Ошибка при получении PDF:', error)
-  //   }
-  // }
-
   const clickHandlePrinter = async () => {
-    const url = '/rest/hosp/statcard' // Замените на ваш URL
+    const url = '/rest/hosp/statcard'
 
     try {
-      const response = await axios.post(url, { id }) // Получаем данные
-
+      const response = await axios.post(url, {
+        id,
+        repCode: 'stat.card.sancur'
+      })
+      console.log(response.data.data, 'ответ от сервера')
       if (response.status === 200) {
-        let base64Data = response.data.data // Здесь ваш текст в формате Base64
+        let base64Data = response.data.data
 
-        // Проверяем, является ли base64Data строкой
         if (typeof base64Data !== 'string') {
           console.error('Полученные данные не являются строкой:', base64Data)
           return
         }
 
-        // Если строка Base64 была закодирована для URL, заменяем символы
         base64Data = base64Data.replace(/-/g, '+').replace(/_/g, '/')
 
-        // Проверяем, что строка корректно закодирована
         const padding = base64Data.length % 4
         if (padding) {
-          base64Data += '='.repeat(4 - padding) // Добавляем необходимое количество символов '='
+          base64Data += '='.repeat(4 - padding)
         }
 
-        // Создаем Blob из Base64
-        const byteCharacters = atob(base64Data) // Декодируем Base64
+        const byteCharacters = atob(base64Data)
         const byteNumbers = new Uint8Array(byteCharacters.length)
         for (let i = 0; i < byteCharacters.length; i++) {
           byteNumbers[i] = byteCharacters.charCodeAt(i)
         }
-        const blob = new Blob([byteNumbers], { type: 'application/pdf' }) // Укажите правильный MIME-тип
+        const blob = new Blob([byteNumbers], { type: 'application/pdf' })
 
-        // Создаем ссылку для скачивания
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
-        link.setAttribute('download', 'stat_card.pdf') // Имя файла для сохранения
+        link.setAttribute('download', 'stat_card.pdf')
         document.body.appendChild(link)
-        link.click() // Имитируем клик для скачивания
-        document.body.removeChild(link) // Удаляем ссылку после скачивания
+        link.click()
+        document.body.removeChild(link)
       }
     } catch (error) {
       console.error('Ошибка при получении файла:', error)

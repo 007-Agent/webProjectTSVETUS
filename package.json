@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.3",
     "debounce": "^2.2.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "lodash.debounce": "^4.0.8",
     "math": "0.0.3",
     "nanoid": "^5.1.5",

@@ -18,6 +18,16 @@ const getStyles = () => {
 
       margin: '0 auto'
     },
+    targetElement: {
+      // Changed the key to a generic name, but you can rename it appropriately.
+     
+      padding: '4px 4px 2px',
+     
+      color: 'black',
+      textAlign: 'left',
+      fontFamily: 'Arial',
+      fontSize: '22px'
+    },
     diary__table: {
       position: 'relative',
       display: 'flex',
