@@ -12,6 +12,7 @@ const getStyles = () => {
       fontSize: '24px', // Адаптивный размер шрифта для списка
       cursor: 'pointer',
       justifyContent: 'center',
+      
 
       flexWrap: isMobile ? 'wrap' : 'row'
     },
@@ -105,6 +106,7 @@ const getStyles = () => {
       fontSize: '40px',
       textAlign: 'center',
       right: '80px'
+      
     }
   }
 }

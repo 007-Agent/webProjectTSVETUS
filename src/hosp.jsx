@@ -7,7 +7,6 @@ import { SearchProvider } from './hosp/searchProvider'
 import { styles, templates } from 'styles'
 import { registerStyles, check, INITIAL_STATE, reducer } from 'tinput'
 
-
 registerStyles(styles, templates)
 
 import Main from 'hosp/Main'

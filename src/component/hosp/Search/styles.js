@@ -12,7 +12,7 @@ export default {
     width: '30px',
     height: '30px',
     opacity: 0.5,
-    position: 'absolute',
+
     left: '125px',
     top: '87px'
   },

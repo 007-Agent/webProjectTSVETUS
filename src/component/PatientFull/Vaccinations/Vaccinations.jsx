@@ -27,6 +27,7 @@ class Vaccinations extends React.PureComponent {
   }
 
   handleDownload() {
+    console.log(this.props.orderId, 'PRDER')
     let fileName = 'Vactination.pdf'
     let url =
       'api/office/vaccination/pdf?patientId=' +

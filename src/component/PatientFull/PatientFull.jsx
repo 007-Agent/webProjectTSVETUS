@@ -16,6 +16,7 @@ import PND from './PND'
 import Disables from './Disables/Disables.jsx'
 import Directions from './Directions'
 import Dispanserizations from './Dispanserizations'
+import Techniques from './Techniques/Techniques.jsx'
 
 class PatientFull extends React.Component {
   constructor(props) {
@@ -98,6 +99,13 @@ class PatientFull extends React.Component {
         </TPopup>
         <TPopup style={style.popup} label={'Записи на прием:'}>
           <Visits
+            patient={this.props.patient}
+            specialities={this.props.specialities}
+            user={this.props.user}
+          />
+        </TPopup>
+        <TPopup style={style.popup} label={'Приёмы у врачей'}>
+          <Techniques
             patient={this.props.patient}
             specialities={this.props.specialities}
             user={this.props.user}

@@ -3,14 +3,22 @@ import styles from './styles'
 import { CiCirclePlus } from 'react-icons/ci'
 import { Record } from '../DiaryEntry/Record/Records'
 import { DiTypo3 } from 'react-icons/di'
+
 import { nanoid } from 'nanoid'
+
 // import Temperature from '../../MetaRecords/Temperature/Temperature'
 import TempItem from './TempItem/TempItem'
 export const TemperatureSheet = props => {
   const [records, setRecords] = useState(props.data)
   console.log(props.user)
   console.log(props.data, 'RECORDSSS')
-
+  // const [temperatures, setTemperatures] = useState([
+  //   { day: 1, temp: 40 },
+  //   { day: 2, temp: 37 },
+  //   { day: 3, temp: 38.5 }
+  // ])
+  // const [inputTemp, setInputTemp] = useState('')
+  // const [dayCount, setDayCount] = useState(4)
   const strDate = date => {
     return `${String(date.getDate()).padStart(2, '0')}.${String(
       date.getMonth() + 1
@@ -54,6 +62,7 @@ export const TemperatureSheet = props => {
     }
     return dest
   }
+
   const DeleteTempItem = event => {
     const newData = props.data.map(item => {
       if (item.data && item.data.list) {
@@ -65,10 +74,19 @@ export const TemperatureSheet = props => {
     setRecords(newData)
   }
 
+  // const addTemperature = () => {
+  //   const newTemp = parseFloat(inputTemp)
+  //   if (!isNaN(newTemp)) {
+  //     setTemperatures([...temperatures, { day: dayCount, temp: newTemp }])
+  //     setDayCount(dayCount + 1)
+  //     setInputTemp('')
+  //   }
+  // }
+
   const addRecord = () => {
     const newData = clone(records)
     console.log(newData)
-
+   
     console.log(newData, 'EDEDE')
     const found = newData.find(v => v.data?.list)
 
@@ -82,6 +100,7 @@ export const TemperatureSheet = props => {
           date: strDate(current),
           time: cutTime(current),
           text: ''
+          
         }),
         date: strDate(current),
         time: cutTime(current)
@@ -126,7 +145,7 @@ export const TemperatureSheet = props => {
 
   return (
     <div style={styles.diary__temp}>
-      <div >
+      <div>
         <h2 style={styles.title}>
           Лист регистрации показателей жизненно важных функций организма
         </h2>
@@ -144,6 +163,8 @@ export const TemperatureSheet = props => {
             ))} */}
             {content}
           </div>
+
+          
         </div>
       </div>
     </div>

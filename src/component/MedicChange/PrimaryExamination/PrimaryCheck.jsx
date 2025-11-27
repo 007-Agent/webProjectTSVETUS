@@ -79,7 +79,7 @@ export const PrimaryCheck = props => {
       console.log(response.data.data, 'ответ от сервера')
       if (response.status === 200) {
         let base64Data = response.data.data
-
+        console.log(base64Data, 'base64Data')
         if (typeof base64Data !== 'string') {
           console.error('Полученные данные не являются строкой:', base64Data)
           return

@@ -178,7 +178,11 @@ class Main extends React.Component {
         />
         {/* {content} */}
         {this.state.id ? (
-          <MedicForms onClose={this.handleCloseMedicForms} id={this.state.id} user={this.props.user}/> // Передаем обработчик закрытия
+          <MedicForms
+            onClose={this.handleCloseMedicForms}
+            id={this.state.id}
+            user={this.props.user}
+          /> // Передаем обработчик закрытия
         ) : (
           content
         )}

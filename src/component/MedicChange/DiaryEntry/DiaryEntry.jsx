@@ -6,8 +6,6 @@ import { Record } from '../DiaryEntry/Record/Records'
 import { DiTypo3 } from 'react-icons/di'
 import { BiPrinter } from 'react-icons/bi'
 import axios from 'axios'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
 
 export const DiaryEntry = props => {
   const [records, setRecords] = useState(props.data)
@@ -200,15 +198,6 @@ export const DiaryEntry = props => {
           <CiCirclePlus style={styles.diary__plus} onClick={addRecord} />
           <BiPrinter onClick={clickHandlePrinter} />
           <div className='diary__list' ref={recordsContainerRef}>
-            {/* {records.map((record, i) => (
-              <Record
-                key={record.key}
-                user={props.user}
-                project={props.project}
-                name={props.name}
-                data={props.data}
-              />
-            ))} */}
             <table
               style={{
                 width: '864px',

@@ -7,12 +7,10 @@ import { DiaryEntry } from '../../MedicChange/DiaryEntry/DiaryEntry'
 import { DoctorExamination } from '../../MedicChange/DoctorCheck/DoctorExamination'
 import { PrimaryCheck } from '../../MedicChange/PrimaryExamination/PrimaryCheck'
 import { TemperatureSheet } from '../../MedicChange/TemperatureSheet/TemperatureSheet'
+
 import Info from '../../hosp/HospList/HospFull/Info/Info.jsx'
 const PROJECT = 'hosp'
 function MedicForms(props) {
-  // const PrimaryExamination = () => <div>Содержимое первичного осмотра</div>;
-  // const DoctorExamination = () => <div>Содержимое осмотра лечащим врачом</div>;
-  // const TemperatureSheet = () => <div>Содержимое температурного листа</div>;
   console.log(props.id)
   console.log(props.name)
   const [index, setIndex] = useState(0)
@@ -30,7 +28,7 @@ function MedicForms(props) {
     try {
       const response = await axios.post('/rest/hosp/full', query)
       setInfo(response.data.data)
-      setIsLoading(true) // Предполагаем, что данные находятся в response.data
+      setIsLoading(true)
     } catch (err) {
       console.error('Ошибка при выполнении запроса:', err)
     }
@@ -38,6 +36,49 @@ function MedicForms(props) {
   const handleMenuShow = event => {
     setIndex(event.target.value) // Сохраняем индекс выбранного элемента
     handleClick(event.target.value)
+  }
+
+  const clickHandlePDF = async () => {
+    const url = '/rest/hosp/statcard'
+
+    try {
+      const response = await axios.post(url, {
+        id,
+        repCode: 'stat.card.titul'
+      })
+      console.log(response.data.data, 'ответ от сервера')
+      if (response.status === 200) {
+        let base64Data = response.data.data
+
+        if (typeof base64Data !== 'string') {
+          console.error('Полученные данные не являются строкой:', base64Data)
+          return
+        }
+
+        base64Data = base64Data.replace(/-/g, '+').replace(/_/g, '/')
+
+        const padding = base64Data.length % 4
+        if (padding) {
+          base64Data += '='.repeat(4 - padding)
+        }
+
+        const byteCharacters = atob(base64Data)
+        const byteNumbers = new Uint8Array(byteCharacters.length)
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i)
+        }
+        const blob = new Blob([byteNumbers], { type: 'application/pdf' })
+
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.setAttribute('download', 'stat_card_titul.pdf')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
+    } catch (error) {
+      console.error('Ошибка при получении файла:', error)
+    }
   }
 
   const handleClick = index => {
@@ -78,6 +119,7 @@ function MedicForms(props) {
           name={'records'}
         />
       )
+      
     } else {
       setSelectedComponent(<div>Выберите тип медицинской формы</div>)
     }
@@ -107,12 +149,14 @@ function MedicForms(props) {
               <option value='2'>Осмотр врачом</option>
               <option value='3'>Температурный лист</option>
               <option value='4'>Дневниковые записи</option>
+              <option value='5'>Грфафиу</option>
             </select>
           ) : (
             <div style={styles.outline__info}>
               Загружаем информацию о пациенте...
             </div>
           )}
+          <button onClick={clickHandlePDF}>ЧЕК</button>
           <MdClear style={styles.icon} onClick={props.onClose} />
         </div>
         {isLoading && <Info info={info} />}
