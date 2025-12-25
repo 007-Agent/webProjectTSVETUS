@@ -28,11 +28,12 @@ class Patients extends React.Component {
     this.handlePatientRemove = this.handlePatientRemove.bind(this)
     this.handleRemoveClose = this.handleRemoveClose.bind(this)
   }
-
+    
   componentDidMount() {
     this.modified = true
     this.refresh()
   }
+  
 
   componentWillUnmount() {
     this.mounted = false
@@ -45,12 +46,13 @@ class Patients extends React.Component {
       sender: this,
       target: 'patients'
     })
+    
   }
 
   handlePatientClick(event) {
     this.setState({ index: event.index })
   }
-
+  
   handlePatientClose() {
     this.setState({ index: -1 })
   }
@@ -65,7 +67,7 @@ class Patients extends React.Component {
       this.refresh()
     }
   }
-
+  
   render() {
     let style = merge(styles, this.props.style)
 
@@ -100,7 +102,7 @@ class Patients extends React.Component {
         />
       )
     }
-
+    
     let caption =
       this.state.wait || this.state.patients.length > 0
         ? 'Пациенты'

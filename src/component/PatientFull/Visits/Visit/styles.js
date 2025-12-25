@@ -7,7 +7,8 @@ export default {
     alignItems: 'center',
     justifyContent: 'space-between',
     margin: '16px 0 16px 0',
-    fontSize: '20px'
+    fontSize: '20px',
+    height: '30px'
   },
   box: {
     display: 'flex',

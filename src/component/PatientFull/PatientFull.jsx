@@ -25,6 +25,7 @@ class PatientFull extends React.Component {
       analyzes: []
     }
     this.handleClick = this.handleClick.bind(this)
+    console.log(this.props.patient, 'PATIENTS')
   }
 
   handleClick() {

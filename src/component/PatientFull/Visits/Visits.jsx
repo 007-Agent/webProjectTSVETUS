@@ -88,11 +88,12 @@ import styles from './styles.js'
 
 const Visits = ({ patient, specialities, user, style }) => {
   const [items, setItems] = useState([])
+  console.log(items, 'UTUT')
   const [wait, setWait] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const clientsPerPage = 1
+  const clientsPerPage = 30
   const isMounted = useRef(true)
-
+  console.log(patient, 'BBBVBVB')
   const fetchVisits = () => {
     const patientId = patient?.id || 0
     if (patientId > 0) {
@@ -101,6 +102,7 @@ const Visits = ({ patient, specialities, user, style }) => {
         .post('/api/visit/list', { query: { patientId } })
         .then(response => {
           if (isMounted.current) {
+            console.log(response.data.data, 'RDRDRD')
             setItems(response.data.data)
             setWait(false)
             setCurrentPage(1) // при загрузке сбрасываем страницу на первую
@@ -158,7 +160,7 @@ const Visits = ({ patient, specialities, user, style }) => {
         user={user}
         onRefresh={fetchVisits}
       />
-      {visitItems}
+      <div style={styles.visit_content}>{visitItems}</div>
 
       <div style={styles.button_content}>
         <button

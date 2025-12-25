@@ -22,6 +22,10 @@ export default {
     fontSize: '18px',
     margin: '16px 0px 0px',
     width: '220px'
+  },
+  visit_content: {
+     display: 'flex',
+     flexDirection: 'column'
   }
 }
 

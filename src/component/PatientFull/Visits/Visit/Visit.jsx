@@ -4,16 +4,20 @@ import PropTypes from 'prop-types'
 import { strDate, cutTime, merge, TButton, TIcon } from 'tinput'
 
 import Edit from './Edit'
-
+import axios from 'axios'
 import styles from './styles.js'
 
 const Visit = props => {
   console.log(props.visit, 'VZVZVZ')
+  const VisitDocId = props.visit.visitDocId
+  console.log(props.visit.visitDocId, 'VisitDocId')
   const visit = props.visit.date
   const roomer = props.visit.room
   const id = props.patient.id
   const [show, setShow] = useState(false)
   console.log(props.visit.room, 'prvisrom')
+
+  console.log(props.patient, 'GGGGG')
   // const style = merge(styles, props.style)
 
   // let cs = style.container
@@ -22,13 +26,87 @@ const Visit = props => {
   // } else {
   //   cs = merge(cs, style.expired)
   // }
-  const handleClickConsole = () => {
-    console.log(roomer)
+  // const handleClickConsole = () => {
+  //   console.log(roomer)
+  // }
+
+  // const handleDownloadFile = async () => {
+  //   try {
+  //     // const response = await axios.get(
+  //   'https://profiweb.kdpmc.ru:8443/rest/hist/document?id=5768472&format=pdf',
+  //     //   {},
+  //     //   {
+  //     //     responseType: 'blob'
+  //     //   }
+  //     // )
+  //       const response = await axios.get(
+  //       'http://127.0.0.1/rest/hist/document?id=5768472&format=pdf',
+  //       {},
+  //       {
+  //         responseType: 'blob'
+  //       }
+  //     )
+
+  //     const blob = response.data // уже Blob
+  //     const url = URL.createObjectURL(blob)
+
+  //     const link = document.createElement('a')
+  //     link.href = url
+  //     link.download = 'document.pdf'
+  //     link.click()
+
+  //     URL.revokeObjectURL(url)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
+
+  const handleDownloadFile22 = async () => {
+    try {
+      const response = await axios.get(
+        `/rest/hist/document?id=${props.visit.visitDocId}&format=rtf`,
+        {
+          responseType: 'blob'
+        }
+      )
+      console.log(response.data, 'data')
+      const blob = response.data // уже Blob
+      const url = URL.createObjectURL(blob)
+
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'document.rtf'
+      link.click()
+
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      console.error(err)
+    }
   }
-  const onClose = event => {
-    setShow(false)
-    if (event.refresh && props.onRefresh) props.onRefresh()
-  }
+
+  // const handleDownloadFile22 = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       '/rest/hist/document?id=5768472&format=rtf',
+
+  //       {
+  //         responseType: 'blob'
+  //       }
+  //     )
+  //     console.log(response.data, 'data')
+  //     const blob = response.data // уже Blob
+  //     const url = URL.createObjectURL(blob)
+
+  //     const link = document.createElement('a')
+  //     link.href = url
+  //     link.download = 'document.rtf'
+  //     link.click()
+
+  //     URL.revokeObjectURL(url)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
 
   const onShow = () => {
     setShow(true)
@@ -80,7 +158,7 @@ const Visit = props => {
           style={styles.icon}
           name={'save'}
           timeout={7000}
-          onClick={handleClickConsole}
+          onClick={handleDownloadFile22}
         />
       </div>
     </div>

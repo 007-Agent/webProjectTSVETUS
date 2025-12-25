@@ -119,7 +119,6 @@ function MedicForms(props) {
           name={'records'}
         />
       )
-      
     } else {
       setSelectedComponent(<div>Выберите тип медицинской формы</div>)
     }
