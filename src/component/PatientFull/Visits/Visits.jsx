@@ -91,7 +91,7 @@ const Visits = ({ patient, specialities, user, style }) => {
   console.log(items, 'UTUT')
   const [wait, setWait] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const clientsPerPage = 30
+  const clientsPerPage = 1
   const isMounted = useRef(true)
   console.log(patient, 'BBBVBVB')
   const fetchVisits = () => {
@@ -126,18 +126,6 @@ const Visits = ({ patient, specialities, user, style }) => {
 
   const combinedStyle = merge(styles, style)
 
-  const visitItems = items
-    .slice((currentPage - 1) * clientsPerPage, currentPage * clientsPerPage)
-    .map((v, i) => (
-      <Visit
-        key={i}
-        style={combinedStyle.visit}
-        patient={patient}
-        visit={v}
-        onRefresh={fetchVisits}
-      />
-    ))
-
   const totalPages = Math.ceil(items.length / clientsPerPage)
 
   const goToPreviousPage = () => {
@@ -160,9 +148,9 @@ const Visits = ({ patient, specialities, user, style }) => {
         user={user}
         onRefresh={fetchVisits}
       />
-      <div style={styles.visit_content}>{visitItems}</div>
+      {/* <div style={styles.visit_content}>{visitItems}</div> */}
 
-      <div style={styles.button_content}>
+      {/* <div style={styles.button_content}>
         <button
           onClick={goToPreviousPage}
           disabled={currentPage === 1}
@@ -178,7 +166,7 @@ const Visits = ({ patient, specialities, user, style }) => {
           disabled={currentPage === totalPages || totalPages === 0}>
           Следующая →
         </button>
-      </div>
+      </div> */}
       <TLoad show={wait} />
     </div>
   )

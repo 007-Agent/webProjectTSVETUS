@@ -69,7 +69,7 @@ module.exports = [
       proxy: [
         {
           context: ['/api', '/rest', '/policy'],
-          target: 'http://10.16.1.128:8080',
+          target: 'http://127.0.0.1:8080',
 
           changeOrigin: true,
           secure: false,
@@ -148,7 +148,7 @@ module.exports = [
         {
           context: ['/api', '/rest', '/policy'],
           // target: 'http://127.0.0.1:8080',
-          target: 'http://10.16.1.128:8080',
+          target: 'http://127.0.0.1:8080:8080',
           changeOrigin: true,
           secure: false,
           bypass: function (req, res, proxyOptions) {

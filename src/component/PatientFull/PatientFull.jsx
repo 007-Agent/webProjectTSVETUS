@@ -98,14 +98,16 @@ class PatientFull extends React.Component {
         <TPopup style={style.popup} label={'Диспансеризация:'}>
           <Dispanserizations patientId={this.props.patient.id} />
         </TPopup>
-        <TPopup style={style.popup} label={'Записи на прием:'}>
+        <TPopup style={style.popup} label={'Запись на прием:'}>
           <Visits
             patient={this.props.patient}
             specialities={this.props.specialities}
             user={this.props.user}
           />
         </TPopup>
-        <TPopup style={style.popup} label={'Приёмы у врачей'}>
+        <TPopup
+          style={style.popup}
+          label={'Консультация, диагностика, документация'}>
           <Techniques
             patient={this.props.patient}
             specialities={this.props.specialities}

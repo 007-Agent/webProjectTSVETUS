@@ -33,7 +33,8 @@ const refactorIntervals = intervals => {
 const Appointment = props => {
   const specialities = props.specialities
   const style = merge(styles, props.style)
-
+  console.log(props.patient.branchId, 'BRABNNCN')
+  const branchId = props.patient.branchId
   const [state, setState] = useState('none')
   const [specId, setSpecId] = useState()
   const [fromDate, setFromDate] = useState(() => new Date())
@@ -126,7 +127,12 @@ const Appointment = props => {
     if (specId > 0 && fromDate.getTime() <= toDate.getTime()) {
       post({
         url: '/api/sched/intervals',
-        data: { specId, fromDate: isoDate(fromDate), toDate: isoDate(toDate) },
+        data: {
+          specId,
+          branchId,
+          fromDate: isoDate(fromDate),
+          toDate: isoDate(toDate)
+        },
         sender,
         success: data => {
           setIntervals(refactorIntervals(data))

@@ -10,6 +10,7 @@ import styles from './styles.js'
 const Visit = props => {
   console.log(props.visit, 'VZVZVZ')
   const VisitDocId = props.visit.visitDocId
+  // const VisitDocId = 122
   console.log(props.visit.visitDocId, 'VisitDocId')
   const visit = props.visit.date
   const roomer = props.visit.room
@@ -154,12 +155,16 @@ const Visit = props => {
       {cancel}
       {edit}
       <div style={styles.row}>
-        <TIcon
-          style={styles.icon}
-          name={'save'}
-          timeout={7000}
-          onClick={handleDownloadFile22}
-        />
+        {VisitDocId ? (
+          <TIcon
+            style={styles.icon}
+            name={'save'}
+            timeout={7000}
+            onClick={handleDownloadFile22}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   )
