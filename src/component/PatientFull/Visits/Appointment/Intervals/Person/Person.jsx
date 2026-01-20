@@ -10,10 +10,12 @@ import styles from './styles'
 
 const Person = props => {
   const person = props.person
-
+  console.log(person, 'PERS')
   const [visitId, setVisitId] = useState(0)
   const [index, setIndex] = useState(-1)
-
+  const now = new Date()
+  const currentTime = now.getHours() + ':' + now.getMinutes()
+  console.log(currentTime, 'CDCCDCD')
   const style = merge(styles, props.style)
 
   const onClick = () => {
@@ -22,6 +24,7 @@ const Person = props => {
 
   const onSign = event => {
     const id = event.visit?.id
+    console.log(id, 'IIII')
     if (id > 0) setVisitId(id)
     else setVisitId(0)
   }
@@ -37,8 +40,36 @@ const Person = props => {
     setIndex(index)
   }
 
-  const dates = person.dates
-    ? person.dates.map((date, dateIndex) => {
+  const processedPerson = person
+    ? {
+        ...person,
+        dates:
+          person.dates?.map(date => {
+            // Проверяем, сегодняшняя ли это дата
+            const today = new Date()
+            const todayString = today.toISOString().split('T')[0]
+            const isTodayDate = date.date === todayString
+
+            // Фильтруем интервалы только для сегодняшней даты
+            const intervals = isTodayDate
+              ? date.intervals?.filter(visit => {
+                  const now = new Date()
+                  const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
+                  return visit.time && visit.time.substring(0, 5) >= currentTime
+                }) || []
+              : date.intervals || [] // Для не-сегодняшних оставляем все интервалы
+
+            return {
+              ...date,
+              intervals
+            }
+          }) || []
+      }
+    : null
+  console.log(processedPerson, 'PR')
+  console.log(person, 'PR22')
+  const dates = processedPerson.dates
+    ? processedPerson.dates.map((date, dateIndex) => {
         if (dateIndex === index) {
           const intervals = date.intervals
             ? date.intervals.map(visit => (
@@ -70,7 +101,8 @@ const Person = props => {
         }
       })
     : null
-
+  console.log(dates, 'DATES')
+  console.log(index, 'INDEX')
   const datesCaption =
     index < 0 ? (
       <div style={style.date.text}>Даты, доступные для записи:</div>

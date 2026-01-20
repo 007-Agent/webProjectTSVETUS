@@ -9,6 +9,7 @@ import styles from './styles'
 
 const Intervals = props => {
   const intervals = props.intervals || []
+  console.log(intervals, "INTER")
   const style = merge(styles, props.style)
   const persons = intervals.map((person, index) => (
     <Person

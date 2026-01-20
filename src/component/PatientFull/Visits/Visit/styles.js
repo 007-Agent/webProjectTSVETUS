@@ -9,11 +9,14 @@ const getStyles = () => {
       justifyContent: 'space-between',
       margin: '16px 0 16px 0',
       fontSize: '20px',
-      height: '30px',
-      padding: isMobile ? '5px' : '0',
+      height: '36px',
+      padding: isMobile ? '5px' : '2px',
       fontSize: isMobile ? '14px' : '18px',
       border: isMobile ? '2px solid rgb(189, 149, 133) ' : 'none',
-      borderRaduis: isMobile ? '5px ' : 'none'
+      borderRaduis: isMobile ? '5px ' : 'none',
+      borderBottom: isMobile
+        ? '2px solid rgb(189, 149, 133) '
+        : '1px solid rgb(189, 149, 133)'
     },
     box: {
       display: 'flex',
@@ -21,7 +24,7 @@ const getStyles = () => {
       justifyContent: 'space-between',
       margin: '16px 0px',
 
-      gap: '0 7px'
+      gap: isMobile ? '0 7px' : '0 25px'
     },
     date: {
       color: 'rgb(189, 122, 81)'
@@ -34,7 +37,8 @@ const getStyles = () => {
 
       fontFamily: 'Arial',
       fontSize: '18px',
-      fontSize: isMobile ? '12px' : '18px'
+      fontSize: isMobile ? '14px' : '18px',
+      paddingLeft: isMobile ? '10px' : '30px'
     },
     room: {
       fontStyle: 'italic',
@@ -75,7 +79,9 @@ const getStyles = () => {
     // },
 
     speciality: {
-      fontStyle: 'italic'
+      fontStyle: 'italic',
+      fontSize: '14px',
+      fontWeight: 600
     },
 
     // room: {
@@ -91,11 +97,21 @@ const getStyles = () => {
     //     padding: '4px'
     //   }
     // },
-    cancel: {
+    canceled: {
+      cursor: 'pointer',
+
       display: 'flex',
-      justifySelf: 'flex-end',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '3px',
+      backgroundColor: 'rgba(248, 240, 126, 0.35)',
+      color: 'rgb(0, 0, 0)',
       borderRadius: '4px',
-      padding: '4px'
+      textAlign: 'center',
+      border: '1px solid rgb(46, 18, 7)',
+      fontFamily: 'Arial',
+      fontSize: isMobile ? '10px' : '18px',
+      justifySelf: 'flex-end'
     },
     icon: {
       width: isMobile ? '12px' : '25px',

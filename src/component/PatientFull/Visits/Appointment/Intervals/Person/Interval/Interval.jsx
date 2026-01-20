@@ -7,9 +7,9 @@ import styles from './styles'
 
 const Interval = props => {
   const visit = props.visit || {}
-
+  console.log(visit, 'VISITT')
   const style = merge(styles, props.style)
-
+  
   const onClick = event => {
     event.preventDefault()
     event.stopPropagation()
